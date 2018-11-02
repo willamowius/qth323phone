@@ -43,7 +43,7 @@ CSettingsDlg::CSettingsDlg(CMyPhoneEndPoint *m_endpoint, QWidget *parent)
 	connect(ui.IDS_RINGFCMD, SIGNAL(clicked()), this, SLOT(slot_GetFile()));
 	connect(ui.IDS_RINGFCMDP, SIGNAL(clicked()), this, SLOT(slot_PlayFile()));
 }
-	
+
 CSettingsDlg::~CSettingsDlg()
 {
 
@@ -53,18 +53,18 @@ void CSettingsDlg::readIni()
 {
 	int i;
 	QString t_str;
-	PConfig& config = p_endpoint->config; 
+	PConfig& config = p_endpoint->config;
 
 	//////////////////////////////////// General /////////////////////////////////////////////
 
 	ui.IDS_UNAMESTR->setText(QString((const char*)p_endpoint->GetLocalUserName()));
 	ui.IDS_RINGFSTR->setText(QString((const char*)config.GetString(RingSoundFileConfigKey, "call.wav")));
-	
+
 	ui.IDS_AANSWERSTR->setChecked(p_endpoint->m_fAutoAnswer);
 	ui.IDS_DTMFSTRSTR->setChecked(p_endpoint->m_fDtmfAsString);
 	ui.IDS_D242STR->setChecked(p_endpoint->DisableH245Tunnelling());
 	ui.IDS_DFSTARTSTR->setChecked(p_endpoint->m_fNoFastStart);
-	
+
 	//////////////////////////////////// Net /////////////////////////////////////////////
 
 	ui.IDS_BANDSTR->setCurrentIndex(config.GetInteger(BandwidthTypeConfigKey, 5));
@@ -79,43 +79,43 @@ void CSettingsDlg::readIni()
 	PString lifaces = config.GetString(ListenerInterfaceConfigKey, "*");
 	lifaces = lifaces.IsEmpty()?"*":lifaces;
 	ui.IDS_LOCISTR->setText(QString((const char*)lifaces));
-	
+
 	//////////////////////////////////// Gatekeeper /////////////////////////////////////////////
-	
+
 	ui.IDS_GKUSESTR->setChecked(config.GetBoolean(UseGatekeeperConfigKey, FALSE));
 	ui.IDS_GKRECSTR->setChecked(config.GetBoolean(RequireGatekeeperConfigKey, FALSE));
 	QString gkhost = QString((const char*)config.GetString(GatekeeperHostConfigKey, ""));
 	ui.IDS_GKHOSTLOCSTR_STR->setText(gkhost);
 	ui.IDS_GKPASSSTR->setText(QString((const char*)config.GetString(GatekeeperPassConfigKey, "")));
-	
-	if(gkhost.isEmpty()) 
+
+	if(gkhost.isEmpty())
 		ui.IDS_GKAUTOLOCSTR->setChecked(true);
-		
+
 	const PStringList aliases = p_endpoint->GetAliasNames();
 	for (i = 1; i < aliases.GetSize(); i++)
 		ui.IDS_UALIASESSTR->addItem(QString((const char*)(aliases[i])));
-	
+
 	//////////////////////////////////// Audio /////////////////////////////////////////////
 	PStringArray playDevices = PSoundChannel::GetDeviceNames(PSoundChannel::Player);
 	for (i = 0; i < playDevices.GetSize(); i++)
 		ui.IDS_OUTDEVSTR->addItem(QString((const char*)playDevices[i]));
-	
-	t_str = QString((const char*)config.GetString(SoundPlayConfigKey, "")); 
+
+	t_str = QString((const char*)config.GetString(SoundPlayConfigKey, ""));
 	if(!t_str.isEmpty())
 		ui.IDS_OUTDEVSTR->setCurrentIndex(ui.IDS_OUTDEVSTR->findText(t_str));
-	
+
 	PStringArray recordDevices = PSoundChannel::GetDeviceNames(PSoundChannel::Recorder);
 	for (i = 0; i < recordDevices.GetSize(); i++)
 		ui.IDS_INDEVSTR->addItem(QString((const char*)recordDevices[i]));
-	
-	t_str = QString((const char*)config.GetString(SoundRecordConfigKey, "")); 
+
+	t_str = QString((const char*)config.GetString(SoundRecordConfigKey, ""));
 	if(!t_str.isEmpty())
 		ui.IDS_INDEVSTR->setCurrentIndex(ui.IDS_INDEVSTR->findText(t_str));
 
 	ui.IDS_SLSTR->setChecked(p_endpoint->m_fSilenceOn);
 
 	i = 0;
-	for (;;) 
+	for (;;)
 	{
 		PString key = psprintf("%u", ++i);
 		PString name = config.GetString(CodecsConfigSection, key, "");
@@ -135,7 +135,7 @@ void CSettingsDlg::readIni()
 		//PString *pstr = (PString *)vdevices.GetAt(i);
 		ui.IDS_DEVSTR->addItem(QString::fromUtf8((const char*)vdevices[i]));
 	}
-	
+
 	PStringArray fakedevice = PVideoInputDevice::GetDriversDeviceNames("FakeVideo");
 	for (i = 0; i < fakedevice.GetSize(); i++)
 		ui.IDS_DEVSTR->addItem(QString((const char*)fakedevice[i]));
@@ -143,9 +143,9 @@ void CSettingsDlg::readIni()
 	t_str = QString((const char*)config.GetString(VideoDeviceConfigKey, "")); //YK: Should really be search in list
 	if(!t_str.isEmpty())
 		ui.IDS_DEVSTR->setCurrentIndex(ui.IDS_DEVSTR->findText(t_str));
-	
+
 	i = 0;
-	for (;;) 
+	for (;;)
 	{
 		PString key = psprintf("%u", ++i);
 		PString name = config.GetString(VideoCodecsConfigSection, key, "");
@@ -159,15 +159,15 @@ void CSettingsDlg::readIni()
 		ui.IDC_VSIZE->addItem(StandartSizes[i]);
 		ui.IDC_VSIZE2->addItem(StandartSizes[i]);
 	}
-	
+
 	ui.IDS_VSENDSTR->setChecked(config.GetBoolean(AutoTransmitVideoConfigKey, TRUE));
 	ui.IDS_VRCVDSTR->setChecked(config.GetBoolean(AutoReceiveVideoConfigKey, TRUE));
 	ui.IDS_VLOCSTR->setChecked(config.GetBoolean(VideoLocalConfigKey, TRUE));
-	
+
 	ui.IDS_LVFLIPSTR->setChecked(config.GetBoolean(VideoOutVFlipConfigKey, TRUE));
 	ui.IDS_RVFLIPSTR->setChecked(config.GetBoolean(VideoInVFlipConfigKey, TRUE));
 	//videoPage.m_localFlip = config.GetBoolean(VideoFlipLocalConfigKey, FALSE);
-	
+
 	ui.IDS_QTYSTR->setValue(config.GetInteger(VideoQualityConfigKey, 15));
 	ui.IDC_FPSSTATIC->setValue(config.GetInteger(VideoFPSKey, 10));
 
@@ -185,7 +185,7 @@ void CSettingsDlg::saveIni()
 {
 	int i, n, val;
 	QString t_str;
-	PConfig& config = p_endpoint->config; 
+	PConfig& config = p_endpoint->config;
 
 	p_endpoint->m_fAutoAnswer = ui.IDS_AANSWERSTR->isChecked();
 	config.SetBoolean(AutoAnswerConfigKey, p_endpoint->m_fAutoAnswer);
@@ -193,11 +193,11 @@ void CSettingsDlg::saveIni()
 	config.SetString(RingSoundFileConfigKey, ui.IDS_RINGFSTR->text().toAscii().data());
 
 	p_endpoint->m_fSilenceOn = ui.IDS_SLSTR->isChecked();
-	p_endpoint->SetSilenceDetectionMode(p_endpoint->m_fSilenceOn ? 
+	p_endpoint->SetSilenceDetectionMode(p_endpoint->m_fSilenceOn ?
 		H323AudioCodec::AdaptiveSilenceDetection :
 		H323AudioCodec::NoSilenceDetection);
 	config.SetBoolean(SilenceDetectConfigKey, p_endpoint->m_fSilenceOn);
-	
+
 	val = ui.IDS_JITSTR->value();
 	p_endpoint->SetAudioJitterDelay(val, val);
 	config.SetInteger(JitterConfigKey, val);
@@ -213,8 +213,8 @@ void CSettingsDlg::saveIni()
 	n = ui.IDS_CADECSSTR->count();
 	for (i = 0; i < n; i++)
 		config.SetString(psprintf("%u", i+1), PString(ui.IDS_CADECSSTR->item(i)->text().toAscii().data()));
-	config.SetDefaultSection(defaultSection); 
-	
+	config.SetDefaultSection(defaultSection);
+
 	// Codecs in separate section
 	defaultSection = config.GetDefaultSection();
 	config.SetDefaultSection(VideoCodecsConfigSection);
@@ -222,7 +222,7 @@ void CSettingsDlg::saveIni()
 	n = ui.IDS_VCADECSSTR->count();
 	for (i = 0; i < n; i++)
 		config.SetString(psprintf("%u", i+1), PString(ui.IDS_VCADECSSTR->item(i)->text().toAscii().data()));
-	config.SetDefaultSection(defaultSection); 
+	config.SetDefaultSection(defaultSection);
 
 	config.SetBoolean(VideoOutVFlipConfigKey, ui.IDS_LVFLIPSTR->isChecked());
 	config.SetBoolean(VideoInVFlipConfigKey, ui.IDS_RVFLIPSTR->isChecked());
@@ -232,7 +232,7 @@ void CSettingsDlg::saveIni()
 
 	config.SetInteger(VideoQualityConfigKey, ui.IDS_QTYSTR->value());
 	config.SetInteger(VideoFPSKey, ui.IDC_FPSSTATIC->value());
-	
+
 	config.SetInteger(VideoInSizeConfigKey, ui.IDC_VSIZE->currentIndex());
 	config.SetInteger(VideoOutSizeConfigKey, ui.IDC_VSIZE2->currentIndex());
 }
@@ -243,18 +243,18 @@ void CSettingsDlg::slot_ApplyChange()
 	// Reload Endpoint capabilities
 	p_endpoint->LoadCapabilities();
 }
-	
+
 void CSettingsDlg::slot_ComboBoxChange(int state)
 {
 	QString t_str;
-	PConfig& config = p_endpoint->config; 
+	PConfig& config = p_endpoint->config;
 
 	if(sender()==ui.IDS_DEVSTR)
 	{
 		t_str = ui.IDS_DEVSTR->currentText();
 		if(!t_str.isEmpty())
 		{
-			printf("VideoDeviceConfigKey - %s\n", t_str.toAscii().data());			
+			printf("VideoDeviceConfigKey - %s\n", t_str.toAscii().data());
 			config.SetString(VideoDeviceConfigKey, t_str.toAscii().data());
 		}
 	}
@@ -263,7 +263,7 @@ void CSettingsDlg::slot_ComboBoxChange(int state)
 		t_str = ui.IDS_INDEVSTR->currentText();
 		if(!t_str.isEmpty())
 		{
-			printf("SetSoundChannelRecordDevice - %s\n", t_str.toAscii().data());			
+			printf("SetSoundChannelRecordDevice - %s\n", t_str.toAscii().data());
 			config.SetString(SoundRecordConfigKey, t_str.toAscii().data());
 			//p_endpoint->SetSoundChannelRecordDevice(t_str.toAscii().data());
 		}
@@ -341,7 +341,7 @@ void CSettingsDlg::slot_VCodecUse(bool fUse)
 	if (fUse)
 		value.replace(OffCodecSuffix, OnCodecSuffix);
 	else
-		value.replace(OnCodecSuffix, OffCodecSuffix); 
+		value.replace(OnCodecSuffix, OffCodecSuffix);
 	item->setText(value);
 }
 
@@ -354,14 +354,14 @@ void CSettingsDlg::slot_ACodecUse(bool fUse)
 	if (fUse)
 		value.replace(OffCodecSuffix, OnCodecSuffix);
 	else
-		value.replace(OnCodecSuffix, OffCodecSuffix); 
+		value.replace(OnCodecSuffix, OffCodecSuffix);
 	item->setText(value);
 }
 
 void CSettingsDlg::slot_VItemChanged(QListWidgetItem *item, QListWidgetItem*)
 {
 	int indx = (item) ? ui.IDS_VCADECSSTR->currentRow() : -1;
-	
+
 	ui.IDS_VCSUPSTR->setEnabled(item && indx>0);
 	ui.IDS_VCSENBLSTR->setEnabled(item);
 	ui.IDS_VCSDOWNSTR->setEnabled(item && indx<ui.IDS_VCADECSSTR->count()-1);
@@ -375,7 +375,7 @@ void CSettingsDlg::slot_VItemChanged(QListWidgetItem *item, QListWidgetItem*)
 void CSettingsDlg::slot_AItemChanged(QListWidgetItem *item, QListWidgetItem*)
 {
 	int indx = (item) ? ui.IDS_CADECSSTR->currentRow() : -1;
-	
+
 	ui.IDS_CSUPSTR->setEnabled(item && indx>0);
 	ui.IDS_CSENBLSTR->setEnabled(item);
 	ui.IDS_CSDOWNSTR->setEnabled(item && indx<ui.IDS_CADECSSTR->count()-1);
@@ -388,13 +388,13 @@ void CSettingsDlg::slot_AItemChanged(QListWidgetItem *item, QListWidgetItem*)
 
 void CSettingsDlg::slot_GetFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, 
+    QString fileName = QFileDialog::getOpenFileName(this,
 		QObject::tr("Выбор аудио файла"),
-		ui.IDS_RINGFSTR->text(), 
+		ui.IDS_RINGFSTR->text(),
 		QObject::tr("аудио файлы (*.wav);;все файлы (*.*)")
 		);
 
-	if (fileName.isEmpty()) 
+	if (fileName.isEmpty())
 		return;
 
 	ui.IDS_RINGFSTR->setText(fileName);
@@ -403,7 +403,7 @@ void CSettingsDlg::slot_GetFile()
 void CSettingsDlg::slot_PlayFile()
 {
 	QString fileName = ui.IDS_RINGFSTR->text();
-	if (fileName.isEmpty()) 
+	if (fileName.isEmpty())
 		return;
 	PSound::PlayFile(fileName.toAscii().data(), FALSE);
 }

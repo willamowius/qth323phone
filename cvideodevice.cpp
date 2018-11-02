@@ -6,7 +6,7 @@
 
 CVideoOutputDevice::CVideoOutputDevice(
 	CMyPhoneEndPoint* pendpoint,
-	bool fFlipVertically, 
+	bool fFlipVertically,
 	bool fFlipHorizontally,
 	bool isLocal,
 	bool doLocalVideoPnP) :
@@ -21,7 +21,7 @@ m_videoDlg(pendpoint->m_vdlg),
 	connect(this, SIGNAL(signal_ShowVideoPanels(bool)), pendpoint, SIGNAL(signal_ShowVideoPanels(bool)));
 	connect(this, SIGNAL(signal_UpdateVideoDlg()), m_videoDlg, SLOT(update()));
 
-	m_x = m_y = 0;  
+	m_x = m_y = 0;
 	m_w = m_h = 200;
 
 	emit signal_ShowVideoPanels(true);
@@ -101,7 +101,7 @@ PBoolean CVideoOutputDevice::SetColourFormat(
 
 	return FALSE;
 }
-	
+
 PBoolean CVideoOutputDevice::FrameComplete()
 {
 	puts("CVideoOutputDevice::FrameComplete()");
@@ -109,14 +109,14 @@ PBoolean CVideoOutputDevice::FrameComplete()
 	unsigned int width, height, size;
 	if(!GetFrameSize(width, height))
 		return FALSE;
-   
+
 	size = frameStore.GetSize();
 
 	m_videoDlg->m_mutex.lock();
 
 	m_videoDlg->m_image = QImage((const uchar *)frameStore.GetPointer(), width, height, QImage::Format_RGB32);
 	m_videoDlg->m_image = m_videoDlg->m_image.mirrored(m_fHorzFlip, m_fVertFlip);
-	
+
 	m_videoDlg->m_mutex.unlock();
 
 	emit signal_UpdateVideoDlg();

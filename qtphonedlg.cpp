@@ -35,11 +35,11 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 		iconComboBox->addItem(QIcon(":/images/Resources/teleph2.png"), tr("Идет разговор"));
 		iconComboBox->addItem(QIcon(":/images/Resources/bell.png"), tr("Входящий звонок"));
 		iconComboBox->setCurrentIndex(STATE_WORK);
-		connect(iconComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slot_SetIcon(int))); 
-		connect(this, SIGNAL(signal_SetIcon(int)), this, SLOT(slot_SetIcon(int))); 
+		connect(iconComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slot_SetIcon(int)));
+		connect(this, SIGNAL(signal_SetIcon(int)), this, SLOT(slot_SetIcon(int)));
 
-		iconComboBox->setCurrentIndex(STATE_READY); 
-		trayIcon->show(); 
+		iconComboBox->setCurrentIndex(STATE_READY);
+		trayIcon->show();
 	}
 
 	connect(ui.actAbout, SIGNAL(triggered()), this, SLOT(about()));
@@ -60,14 +60,14 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 
 	m_pLblStat	= new QLabel();
 	ui.statusbar->addPermanentWidget(m_pLblStat);
-	
+
 	ui.txtAddress->setText("192.168.111.50");
 	//ui.txtAddress->setText("192.168.1.103");
 
 	m_endpoint = new CMyPhoneEndPoint;
-	PConfig& config = m_endpoint->config; 
+	PConfig& config = m_endpoint->config;
 
-#if PTRACING	// If Compiled with PTlib Tracing support (like in OpenH323)
+#if PTRACING	// If compiled with PTlib Tracing support (like in OpenH323)
     myTraceFile = NULL;
     TraceLevel = -1;
 	TraceLevel = 3;
@@ -80,9 +80,9 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 	ui.pnlMsg->setEnabled(false);
 	ui.actShowVideo->setEnabled(false);
 	ui.txtSendMsg->setPlainText("Ваши текстовые сообщения...");
-	
+
 	connect(ui.actShowVideo, SIGNAL(triggered(bool)), this, SLOT(slot_ShowVideoPanels(bool)));
-	
+
 	//////////////////////////// PConfig ////////////////////////////
 	//curLang = GetLangFromTable(config.GetInteger(UILangugeConfigKey, -1));
 	hideStat = config.GetBoolean(HideStatConfigKey, FALSE); // Can show statistic info
@@ -92,11 +92,11 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 
 	ringSoundFile = config.GetString(RingSoundFileConfigKey, "call.wav");
 	ringSoundTimer.SetNotifier(PCREATE_NOTIFIER(OnRingSoundAgain));
-	
+
 	autohideVideoPan = config.GetBoolean(AutoVideoHideConfigKey, TRUE);
 	showVideoPan = TRUE;
 	if(autohideVideoPan)
-		slot_ShowVideoPanels(false);  // hide Video panel in the begining
+		slot_ShowVideoPanels(false);  // hide Video panel in the beginning
 	hidePnP = FALSE;
 	m_endpoint->localVideo = config.GetBoolean(VideoLocalConfigKey, TRUE);
 	//hideSysMsg = config.GetBoolean(SysLogMsgHideConfigKey, FALSE);
@@ -109,17 +109,17 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 	bool m_localVideo = config.GetBoolean(VideoLocalConfigKey, TRUE);
 	bool m_LVflip = config.GetBoolean(VideoOutVFlipConfigKey, FALSE);
 	bool m_RVflip = config.GetBoolean(VideoInVFlipConfigKey, FALSE);
-	bool m_localFlip = config.GetBoolean(VideoFlipLocalConfigKey, FALSE);	
+	bool m_localFlip = config.GetBoolean(VideoFlipLocalConfigKey, FALSE);
 	int m_videoQTY = config.GetInteger(VideoQualityConfigKey, 15);
 	int m_videoFPS = config.GetInteger(VideoFPSKey, 10);
 	int m_videoInMaxBPS = config.GetInteger(VideoInMaxbandWidthKey, 320);
-    int m_videoOutMaxBPS = config.GetInteger(VideoOutMaxbandWidthKey, 320);	
+    int m_videoOutMaxBPS = config.GetInteger(VideoOutMaxbandWidthKey, 320);
 	int m_RecDevSrc = config.GetInteger(VideoSourceConfigKey, -1)+1;
 	int m_videoInSize = config.GetInteger(VideoInSizeConfigKey, 2);
 	int m_videoOutSize = config.GetInteger(VideoOutSizeConfigKey, 2);
-	
+
 	m_endpoint->localFlip = m_localFlip;
-	
+
 	//config.SetInteger(VideoQualityConfigKey, m_videoQTY);
 	//config.SetInteger(VideoFPSKey, m_videoFPS);
 	//config.SetInteger(VideoInMaxbandWidthKey, m_videoInMaxBPS);
@@ -134,8 +134,8 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 	connect(m_endpoint, SIGNAL(signal_OnAnswerCall(const QString &)), this, SLOT(slot_OnAnswerCall(const QString &)));
 	connect(m_endpoint, SIGNAL(signal_ShowVideoPanels(bool)), this, SLOT(slot_ShowVideoPanels(bool)));
 	connect(m_endpoint, SIGNAL(signal_CreateConnection()), this, SLOT(slot_CreateConnection()));
-	
-	m_endpoint->Initialise(this);		
+
+	m_endpoint->Initialise(this);
 }
 
 QtPhoneDlg::~QtPhoneDlg()
@@ -159,7 +159,7 @@ void QtPhoneDlg::closeEvent(QCloseEvent *ev)
 			ev->ignore();
 	}
 }
-	
+
 void QtPhoneDlg::slot_SetIcon(int index)
 {
 	if(iconComboBox && trayIcon)
@@ -175,7 +175,7 @@ void QtPhoneDlg::slot_SetIcon(int index)
 
 	m_state = (states)index;
 }
- 
+
 void QtPhoneDlg::slot_IconActivated(QSystemTrayIcon::ActivationReason reason)
 {
 	switch (reason)
@@ -197,13 +197,13 @@ void QtPhoneDlg::slot_IconActivated(QSystemTrayIcon::ActivationReason reason)
 void QtPhoneDlg::slot_Close()
 {
 	if(Close())
-		QApplication::quit(); 
+		QApplication::quit();
 }
 
 int QtPhoneDlg::Close()
 {
-	if(QMessageBox::question(this, tr("Закрытие приложения"), 
-		tr("Вы действительно хотите выйти из приложения"), 
+	if(QMessageBox::question(this, tr("Закрытие приложения"),
+		tr("Вы действительно хотите выйти из приложения"),
 		tr("Да"), tr("Нет"), tr("Отмена"))!=0)
 		return 0;
 
@@ -213,7 +213,7 @@ int QtPhoneDlg::Close()
 
 	return 1;
 }
- 
+
 #if PTRACING	// If Compiled with PTlib Tracing support (like in OpenH323)
 
 bool QtPhoneDlg::OpenTraceFile(PConfig & config)
@@ -224,24 +224,24 @@ bool QtPhoneDlg::OpenTraceFile(PConfig & config)
 	PTrace::SetOptions(PTrace::FileAndLine);
 	PTrace::SetOptions(PTrace::TraceLevel);
 	PTrace::SetOptions(PTrace::DateAndTime);
-	
+
 	PString traceFileName = "qtphone_trc.txt";
-	
+
 	// If already have a trace file, see if need to close it
 	if (myTraceFile != NULL) {
 		// If no change, do nothing more
 		if (myTraceFile->GetFilePath() == PFilePath(traceFileName))
 			return TRUE;
-		
+
 		PTrace::SetStream(NULL);
 		delete myTraceFile;
 		myTraceFile = NULL;
 	}
-	
-	// Have stopped 
+
+	// Have stopped
 	if (traceFileName.IsEmpty())
 		return TRUE;
-	
+
 	PTextFile * traceFile = new PTextFile;
 	if (traceFile->Open(traceFileName, PFile::WriteOnly)) {
 		myTraceFile = traceFile;
@@ -252,12 +252,12 @@ bool QtPhoneDlg::OpenTraceFile(PConfig & config)
 			<< " by " << process.GetManufacturer()
 			<< " on " << process.GetOSClass() << ' ' << process.GetOSName()
 			<< " (" << process.GetOSVersion() << '-' << process.GetOSHardware() << ')');
-		
+
 		return TRUE;
 	}
-	
+
 	//  OutputStatusStr("ERROR! Trace failed.", S_SYSTEM);
-	
+
 	delete traceFile;
 	return FALSE;
 }
@@ -327,7 +327,7 @@ void QtPhoneDlg::slot_OnConnectionEstablished(const QString &remotename)
 	ui.txtSendMsg->clear();
 	ui.pnlMsg->setEnabled(true);
 	ui.actShowVideo->setEnabled(true);
-	
+
 	m_pLblStat->setText("");
 
 	indTimer.RunContinuous(200);
@@ -392,7 +392,7 @@ void QtPhoneDlg::ShowStats() const
 		.arg(ParseBytes(m_endpoint->m_stat.ibRcvd))
 		.arg(ParseBytes(m_endpoint->m_stat.ibRcvd/(m_endpoint->m_stat.iSecs>0?m_endpoint->m_stat.iSecs:1)))
 		.arg(m_endpoint->m_stat.iDelay);
-		
+
 	m_pLblStat->setText(txt);
 }
 
@@ -407,10 +407,10 @@ void QtPhoneDlg::slot_OnConnectionCleared(const QString &remotename)
 
 	indTimer.Stop();
 	ringSoundTimer.Stop();
-	
-	if(autohideVideoPan && showVideoPan)	
+
+	if(autohideVideoPan && showVideoPan)
 		slot_ShowVideoPanels(false);  // hide Video panel if it's visible
-	
+
 	ui.cmdRefuse->setEnabled(false);
 	ui.actRefuse->setEnabled(false);
 	ui.cmdRefuse->setText(tr("Отказать"));
@@ -448,7 +448,7 @@ void QtPhoneDlg::OnUpdateIndicators(PTimer &, INT)
 	H323Connection * connection = m_endpoint->FindConnectionWithLock(m_token);
 	if (connection == NULL)
 		return;
-	
+
 	//static unsigned mS=0, mM=0;
 	unsigned val;
 	H323Channel * channel = connection->FindChannel(RTP_Session::DefaultAudioSessionID, TRUE);
@@ -461,7 +461,7 @@ void QtPhoneDlg::OnUpdateIndicators(PTimer &, INT)
 		//	mS = val;
 		emit signal_SetLevelVolume(val);
 	}
-	
+
 	channel = connection->FindChannel(RTP_Session::DefaultAudioSessionID, FALSE);
 	if (channel != NULL)
 	{
@@ -491,7 +491,7 @@ QString QtPhoneDlg::FindContactName(const H323Connection & connection)
 {
 	// Try to find contact in PhoneBook
 	QString callName = (const char*)connection.GetRemotePartyName();
-/*	
+/*
 	QString callAdr = GetSimpleAdr(QString((const char*)connection.GetRemotePartyAddress()));
 	QStringList allList = adrbook.GetSections();
 	for(int ind=0; ind<allList.GetSize(); ind++)
@@ -506,7 +506,7 @@ void QtPhoneDlg::slot_OnAnswerCall(const QString &remotename)
 	slot_SetIcon(STATE_CALL);
 
 	QString caller = remotename + QString(" звонит.");
-	
+
 	if(trayIcon && !m_endpoint->m_fAutoAnswer)
 		trayIcon->showMessage(tr("Внимание"), caller, QSystemTrayIcon::Information);
 
@@ -525,9 +525,9 @@ void QtPhoneDlg::OnRingSoundAgain(PTimer &, INT)
 	//ChangeIcon(CString(""));
 }
 
-void QtPhoneDlg::slot_OnRefuse() 
+void QtPhoneDlg::slot_OnRefuse()
 {
-	if(autohideVideoPan && showVideoPan)	
+	if(autohideVideoPan && showVideoPan)
 		slot_ShowVideoPanels(false);  // hide Video panel if it's visible
 
 	if(!m_endpoint->HasConnection(m_token))
@@ -537,7 +537,7 @@ void QtPhoneDlg::slot_OnRefuse()
 		{
 			//ui.cmdCall->setEnabled(true);
 		}
-		else 
+		else
 		{
 			connection->AnsweringCall(H323Connection::AnswerCallDenied);
 			connection->Unlock();
@@ -555,7 +555,7 @@ void QtPhoneDlg::SendUserInput(const QString &strusermsg)
 	H323Connection * connection = m_endpoint->FindConnectionWithLock(m_token);
 	if (connection == NULL)
 		return;
-	
+
 //puts("2---------------");
 	connection->SendUserInput(PString(strusermsg.toAscii().data()));
 //puts("3---------------");
@@ -602,7 +602,7 @@ void QtPhoneDlg::slot_MuteMicrophoneCmd(bool state)
 	H323Connection * connection = m_endpoint->FindConnectionWithLock(m_token);
 	if (connection == NULL)
 		return;
-	
+
 	H323Channel * channel = connection->FindChannel(RTP_Session::DefaultAudioSessionID, FALSE);
 	if (channel != NULL) {
 		bool newState = !channel->IsPaused();
@@ -610,9 +610,9 @@ void QtPhoneDlg::slot_MuteMicrophoneCmd(bool state)
 
 		ui.cmdMuteMicrophone->setIcon(state ? QIcon(":/images/Resources/mike_p2.png") :
 			QIcon(":/images/Resources/mike_p1.png"));
-		//m_micMute.SetIcon( ::LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(state?IDI_MICMUTEICON:IDI_MICICON))); 
+		//m_micMute.SetIcon( ::LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(state?IDI_MICMUTEICON:IDI_MICICON)));
 	}
-	
+
 	connection->Unlock();
 }
 
@@ -621,7 +621,7 @@ void QtPhoneDlg::slot_MuteSpeakerCmd(bool state)
 	H323Connection * connection = m_endpoint->FindConnectionWithLock(m_token);
 	if (connection == NULL)
 		return;
-	
+
 	H323Channel * channel = connection->FindChannel(RTP_Session::DefaultAudioSessionID, TRUE);
 	if (channel != NULL) {
 		bool newState = !channel->IsPaused();
@@ -629,9 +629,9 @@ void QtPhoneDlg::slot_MuteSpeakerCmd(bool state)
 
 		ui.cmdMuteSpeaker->setIcon(state ? QIcon(":/images/Resources/sound_button_2.png") :
 			QIcon(":/images/Resources/sound_button.png"));
-		//m_sndMute.SetIcon( ::LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(state?IDI_SNDMUTEICON:IDI_SNDICON)));	
+		//m_sndMute.SetIcon( ::LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(state?IDI_SNDMUTEICON:IDI_SNDICON)));
 	}
-	
+
 	connection->Unlock();
 }
 
@@ -651,7 +651,7 @@ void QtPhoneDlg::about()
 
 	QMessageBox::about(this, caption, text);
 }
- 
+
 void QtPhoneDlg::openContacts()
 {
 	CAddrBook addrBook(this);

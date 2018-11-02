@@ -5,7 +5,7 @@
 CVideoDlg::CVideoDlg(QtPhoneDlg *dlg)
 	: QDialog(0)
 {
-	ui.setupUi(this);	
+	ui.setupUi(this);
 	installEventFilter(this);
 	setWindowFlags(windowFlags() | Qt::WindowMinMaxButtonsHint);
 
@@ -16,7 +16,7 @@ CVideoDlg::~CVideoDlg()
 {
 
 }
-	
+
 void CVideoDlg::closeEvent(QCloseEvent *ev)
 {
 	p_dlg->slot_ShowVideoPanels(false);
@@ -24,12 +24,12 @@ void CVideoDlg::closeEvent(QCloseEvent *ev)
 
 bool CVideoDlg::eventFilter(QObject *obj, QEvent *event)
 {
-	if (event->type() == QEvent::Paint) 
+	if (event->type() == QEvent::Paint)
 	{
 		QPainter painter(this);
 
 		QRect tRect = geometry();
-			
+
 		painter.fillRect(tRect, Qt::black);
 
 		m_mutex.lock();

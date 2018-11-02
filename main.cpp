@@ -8,12 +8,12 @@
 int main(int argc, char *argv[])
 {
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("windows-1251"));
-	QTextCodec::setCodecForCStrings(QTextCodec::codecForName("windows-1251"));  
+	QTextCodec::setCodecForCStrings(QTextCodec::codecForName("windows-1251"));
 
 #ifdef _WIN32
 //#ifdef DEBUG
 	WCHAR title[256];
-	if(GetConsoleTitle(title,sizeof(title))==0) 
+	if(GetConsoleTitle(title,sizeof(title))==0)
 	{
 		AllocConsole();
 		freopen("CONOUT$","wt", stdout);
@@ -26,9 +26,7 @@ int main(int argc, char *argv[])
 //#endif
 #endif
 	QApplication a(argc, argv);
-	puts("1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	PWLibProcess pwlibProcess;
-	puts("2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	QtPhoneDlg *w = new QtPhoneDlg;
 	w->show();
 	int rc =  a.exec();
@@ -74,13 +72,13 @@ void MyTest::Main()
 	argV[argCount] = NULL;
 
 	QTextCodec::setCodecForTr(QTextCodec::codecForName("windows-1251"));
-	QTextCodec::setCodecForCStrings(QTextCodec::codecForName("windows-1251"));  
+	QTextCodec::setCodecForCStrings(QTextCodec::codecForName("windows-1251"));
 
 #ifdef _WIN32
 	if(fCreateConsole)
 	{
 		WCHAR title[256];
-		if(GetConsoleTitle(title,sizeof(title))==0) 
+		if(GetConsoleTitle(title,sizeof(title))==0)
 		{
 			AllocConsole();
 			freopen("CONOUT$","wt", stdout);

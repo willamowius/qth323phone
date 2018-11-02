@@ -12,13 +12,13 @@ CAddrBook::CAddrBook(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	ui.tbl->verticalHeader()->setDefaultSectionSize(20);  
-	
+	ui.tbl->verticalHeader()->setDefaultSectionSize(20);
+
 	connect(ui.cmdAdd, SIGNAL(clicked()), this, SLOT(addAddr()));
 	connect(ui.cmdDel, SIGNAL(clicked()), this, SLOT(delAddr()));
 
 	QFile file(FILE_NAME);
-	if (!file.open(QFile::ReadOnly | QFile::Text)) 
+	if (!file.open(QFile::ReadOnly | QFile::Text))
 		return;
 
 	QString text;
@@ -27,20 +27,20 @@ CAddrBook::CAddrBook(QWidget *parent)
 	int errorColumn;
 	QDomDocument document;
 	if (!document.setContent(device, true, &text, &errorLine,
-		&errorColumn)) 
+		&errorColumn))
 	{
 		QMessageBox::information(this, tr("Ошибка чтения файла"),
 			QString("Файл: %1, строка: %2; %3").arg(text).arg(errorLine).arg(text),
 			QMessageBox::Ok);
 		return;
 	}
-	file.close(); 
+	file.close();
 
 	QTableWidgetItem *newItem;
 	QDomElement elem = document.documentElement().firstChildElement("contact");
 	int row = document.documentElement().elementsByTagName("contact").size();
 	ui.tbl->setRowCount(row);
-	
+
 	row = 0;
 
 	while (!elem.isNull())
@@ -52,15 +52,15 @@ CAddrBook::CAddrBook(QWidget *parent)
 		ui.tbl->setItem(row, 1, newItem);
 
 		row++;
-		
+
 		elem = elem.nextSiblingElement("contact");
-	} 
+	}
 }
 
 CAddrBook::~CAddrBook()
 {
 }
-	
+
 void CAddrBook::closeEvent(QCloseEvent *e)
 {
 	if(!saveIni())
@@ -76,7 +76,7 @@ void CAddrBook::accept()
 int CAddrBook::saveIni()
 {
 	QDomDocument document;
-	QDomProcessingInstruction processingInstruction = document.createProcessingInstruction("xml", 
+	QDomProcessingInstruction processingInstruction = document.createProcessingInstruction("xml",
 		"version=\"1.0\" encoding=\"UTF-8\"");
 	document.appendChild(processingInstruction);
 	QDomElement rootElement = document.createElement("Contacts");
@@ -87,23 +87,23 @@ int CAddrBook::saveIni()
 	int i, n = ui.tbl->rowCount();
 	for(i=0;i<n;i++)
 	{
-		elem = document.createElement("contact"); 
+		elem = document.createElement("contact");
 		elem.setAttribute("name", ui.tbl->item(i, 0)->text());
 		elem.setAttribute("addr", ui.tbl->item(i, 1)->text());
 		rootElement.appendChild(elem);
 	}
 
 	QFile file(FILE_NAME);
-	if (!file.open(QFile::WriteOnly | QFile::Text)) 
+	if (!file.open(QFile::WriteOnly | QFile::Text))
 	{
-		QMessageBox::information(this, tr("Внимание!"), 
+		QMessageBox::information(this, tr("Внимание!"),
 			tr("Невозможно создать файл"), QMessageBox::Ok);
 		return 0;
 	}
 	QIODevice *device = &file;
 	QTextStream out(device);
 	document.save(out, 4);
-	file.close(); 
+	file.close();
 	return 1;
 }
 
@@ -132,7 +132,7 @@ void CAddrBook::addAddr()
 	int row = 0;
 	if(p_item)
 		row = p_item->row()+1;
-	ui.tbl->insertRow(row);	
+	ui.tbl->insertRow(row);
 }
 
 void CAddrBook::delAddr()
@@ -150,5 +150,5 @@ void CAddrBook::delAddr()
 		tr("Да"), tr("Нет"), tr("Отмена"))!=0)
 		return;
 
-	ui.tbl->removeRow(row);	
+	ui.tbl->removeRow(row);
 }

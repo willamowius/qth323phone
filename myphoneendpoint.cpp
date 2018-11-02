@@ -39,16 +39,16 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 {
 	m_dialog = dlg;
 	m_vdlg=new CVideoDlg(m_dialog);
-	
+
 	//////////////////////////// PConfig ////////////////////////////
 	SetAudioJitterDelay(50, config.GetInteger(JitterConfigKey, 50)); //GetMaxAudioJitterDelay()));
 	SetSoundChannelBufferDepth(config.GetInteger(BufferCountConfigKey, GetSoundChannelBufferDepth()));
-	
+
 	// UserInput mode
     // Backward compatibility configuration entry
     unsigned mode = H323Connection::SendUserInputAsString;
 	m_fDtmfAsString=true;
-    if (config.HasKey(DtmfAsStringConfigKey)) 
+    if (config.HasKey(DtmfAsStringConfigKey))
 	{
 		if (!config.GetBoolean(DtmfAsStringConfigKey))
 		{
@@ -61,10 +61,10 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 	SetSendUserInputMode((H323Connection::SendUserInputModes)mode);
 
 	int i;
-	PPluginManager & pluginMgr = PPluginManager::GetPluginManager(); 
+	PPluginManager & pluginMgr = PPluginManager::GetPluginManager();
 	puts("=============pluginMgr.GetPluginsProviding(PSoundChannel)================");
 	//PStringList drvNames = PVideoInputDevice::GetDriverNames();
-	PStringList listA = pluginMgr.GetPluginsProviding("PSoundChannel"); 	
+	PStringList listA = pluginMgr.GetPluginsProviding("PSoundChannel");
 	for(i=0;i<listA.GetSize();i++)
 	{
 		puts((const char*)listA[i]);
@@ -75,25 +75,25 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 		}
 	}
 	puts("=============pluginMgr.GetPluginsProviding(*)================");
-	listA = pluginMgr.GetPluginsProviding("*"); 	
+	listA = pluginMgr.GetPluginsProviding("*");
 	for(i=0;i<listA.GetSize();i++)
 	{
 		puts((const char*)listA[i]);
 	}
 	puts("========================PSoundChannel==================================");
-	listA = pluginMgr.GetPluginsDeviceNames("*", "PSoundChannel"); 
+	listA = pluginMgr.GetPluginsDeviceNames("*", "PSoundChannel");
 	for(i=0;i<listA.GetSize();i++)
 	{
 		puts((const char*)listA[i]);
 	}
 	puts("==========================PVideoInputDevice================================");
-	listA = pluginMgr.GetPluginsDeviceNames("*", "PVideoInputDevice"); 
+	listA = pluginMgr.GetPluginsDeviceNames("*", "PVideoInputDevice");
 	for(i=0;i<listA.GetSize();i++)
 	{
 		puts((const char*)listA[i]);
 	}
 	puts("==========================PVideoOutputDevice================================");
-	listA = pluginMgr.GetPluginsDeviceNames("*", "PVideoOutputDevicel"); 
+	listA = pluginMgr.GetPluginsDeviceNames("*", "PVideoOutputDevicel");
 	for(i=0;i<listA.GetSize();i++)
 	{
 		puts((const char*)listA[i]);
@@ -109,8 +109,8 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 		config.GetString(SoundPlayConfigKey,   GetSoundChannelPlayDevice()));
 	bool fRecorderAvailable = SetSoundChannelRecordDevice(
 		config.GetString(SoundRecordConfigKey, GetSoundChannelRecordDevice()));
-	
-	// set some oter settings from Config
+
+	// set some other settings from Config
 	m_fNoFastStart =  config.GetBoolean(NoFastStartConfigKey, false);
     DisableFastStart(m_fNoFastStart);
 	m_fDoH245Tunnelling = !(config.GetBoolean(NoTunnelingConfigKey, false));
@@ -122,14 +122,14 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
     SetLocalUserName(config.GetString(UsernameConfigKey, GetLocalUserName()));
     SetInitialBandwidth((unsigned)(config.GetReal(BandwidthConfigKey, 10000)*20));
     SetRtpIpTypeofService(config.GetInteger(IpTosConfigKey, GetRtpIpTypeofService()));
-	
+
 	SetRtpIpPorts(config.GetInteger(RTPPortBaseConfigKey, GetRtpIpPortBase()),
 		config.GetInteger(RTPPortMaxConfigKey,  GetRtpIpPortBase()));
 	if(config.HasKey(RouterConfigKey))
 		m_router = config.GetString(RouterConfigKey, m_router.AsString());
-	
+
 	m_fAutoAnswer = config.GetBoolean(AutoAnswerConfigKey, true);
-	
+
     QString alias, aliases;
 	aliases = QString((const char *)config.GetString(AliasConfigKey, ""));
 	puts(aliases.toAscii().data());
@@ -141,11 +141,11 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 		aliases = aliases.mid(iPos+1);
 		AddAliasName(alias.toAscii().data());
 	}
-	
+
 	// The order in which capabilities are added to the capability table
 	// determines which one is selected by default.
 	LoadCapabilities();
-	
+
 	QString str;
 	PString interfaces = config.GetString(ListenerInterfaceConfigKey, "*");
 	if(StartListeners(interfaces.Tokenise(',')))
@@ -165,7 +165,7 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 
 PBoolean CMyPhoneEndPoint::OnIncomingCall(H323Connection &, const H323SignalPDU &, H323SignalPDU &)
 {
-	puts("CMyPhoneEndPoint::OnIncomingCall");	
+	puts("CMyPhoneEndPoint::OnIncomingCall");
 	return TRUE;
 }
 
@@ -187,19 +187,18 @@ H323Connection::AnswerCallResponse CMyPhoneEndPoint::OnAnswerCall(H323Connection
 		m_dialog->ringSoundTimer.Stop();
 		return H323Connection::AnswerCallNow;
 	}
-	
-	if (!m_dialog->ringSoundFile) 
+
+	if (!m_dialog->ringSoundFile)
 	{
 		PSound::PlayFile(m_dialog->ringSoundFile, FALSE);
 		m_dialog->ringSoundTimer.RunContinuous(5000);
 	}
-	
+
 	return H323Connection::AnswerCallPending;
 }
 
 void CMyPhoneEndPoint::OnConnectionEstablished(H323Connection & connection, const PString & token)
 {
-	puts("!!!! CMyPhoneEndPoint::OnConnectionEstablished !!!!");
 	m_dialog->m_token = token;
 	const char *goodName = (const char*)connection.GetRemotePartyName();
 	// store last number in combobox
@@ -222,7 +221,6 @@ void CMyPhoneEndPoint::OnConnectionEstablished(H323Connection & connection, cons
 
 void CMyPhoneEndPoint::OnConnectionCleared(H323Connection & connection, const PString & clearedCallToken)
 {
-	puts("!!!! CMyPhoneEndPoint::OnConnectionCleared !!!!");
 	if(connection.GetCallEndReason()==H323Connection::EndedByRemoteBusy ||
 		connection.GetCallEndReason()==H323Connection::EndedByRefusal)
 	{
@@ -246,24 +244,21 @@ void CMyPhoneEndPoint::OnConnectionCleared(H323Connection & connection, const PS
 
 PBoolean CMyPhoneEndPoint::OpenAudioChannel(H323Connection &connection, PBoolean isEncoding, unsigned bufferSize, H323AudioCodec &codec)
 {
-	puts("!!!! CMyPhoneEndPoint::OpenAudioChannel !!!!");
 	return H323EndPoint::OpenAudioChannel(connection, isEncoding, bufferSize, codec);
 }
 
 PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean isEncoding, H323VideoCodec &codec)
 {
-	puts("!!!! CMyPhoneEndPoint::OpenVideoChannel !!!!");
-
 	PVideoChannel   * channel = new PVideoChannel;
 	PVideoDevice * displayDevice = NULL;
 
-	if (isEncoding) 
+	if (isEncoding)
 	{
 		// Transmitter part
 		if(!autoStartTransmitVideo)
 			return FALSE;
 
-		int m_Quality = config.GetInteger(VideoQualityConfigKey,15);
+		int m_Quality = config.GetInteger(VideoQualityConfigKey, 15);
 		printf("Quality=%d\n", m_Quality);
 		codec.SetTxQualityLevel(m_Quality);
 		//codec.SetBackgroundFill(2);
@@ -275,7 +270,7 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 		const H323Capability & capability = lchannel->GetCapability();
 		PString cname = capability.GetFormatName();
 		PINDEX suffixPos = cname.Find("H.263");
-		if(suffixPos == P_MAX_INDEX) 
+		if(suffixPos == P_MAX_INDEX)
 			suffixPos = cname.Find("H.261");
 
 		int videoSize = config.GetInteger(VideoOutSizeConfigKey, 2);
@@ -307,51 +302,51 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 		default:
 			break;
 		}
-		
+
 		printf("width=%d, height=%d\n", width, height);
 
- //       codec.SetGeneralCodecOption(OpalVideoFormat::FrameWidthOption, width); 
+ //       codec.SetGeneralCodecOption(OpalVideoFormat::FrameWidthOption, width);
  //       codec.SetGeneralCodecOption(OpalVideoFormat::FrameHeightOption, height);
 		codec.SetFrameSize(width, height);
 
-		width = codec.GetWidth(); 
+		width = codec.GetWidth();
 		height = codec.GetHeight();
 
 		printf("width=%d, height=%d\n", width, height);
 
 		int curMBR = codec.GetMaxBitRate();
 		printf("curMBR=%d, videoOutMaxBitRate=%d\n", curMBR, videoOutMaxBitRate);
-		if(curMBR > videoOutMaxBitRate) 
-		//if(curMBR != videoOutMaxBitRate) 
+		if(curMBR > videoOutMaxBitRate)
+		//if(curMBR != videoOutMaxBitRate)
 			codec.SetMaxBitRate(videoOutMaxBitRate);
 
 		int videoFramesPS = config.GetInteger(VideoFPSKey, 10);
 		codec.SetGeneralCodecOption("Frame Rate",videoFramesPS);
-		
+
 		printf("Frame Rate=%d\n", videoFramesPS);
-		
-		
+
+
 #if PTLIB_MAJOR<=2 && PTLIB_MINOR<10
 		codec.cacheMode = 1;
 #endif
 		//Create grabber.
 		bool NoDevice = false;
-		QString devSName(config.GetString(VideoDeviceConfigKey, "")); 
+		QString devSName(config.GetString(VideoDeviceConfigKey, ""));
 		PString deviceName = devSName.toUtf8().data();
-		if (deviceName.IsEmpty()) 
+		if (deviceName.IsEmpty())
 		{
 			PStringArray devices = PVideoInputDevice::GetDriversDeviceNames(VideoInputDriver);
-			if (!devices.IsEmpty()) 
+			if (!devices.IsEmpty())
 				deviceName = devices[0];
-			else 
+			else
 				NoDevice = true;
 		}
 		printf("deviceName=%s\n", (const char*)deviceName);
 
 		PVideoInputDevice * grabber = NULL;
-		if (deviceName.Find("fake") == 0) 
+		if (deviceName.Find("fake") == 0)
 			NoDevice = true;
-		else 
+		else
 			grabber = PVideoInputDevice::CreateDeviceByName(deviceName,VideoInputDriver);
 
 		bool rc1, rc = false;
@@ -378,16 +373,16 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 #endif
 			rc1 = grabber->SetFrameSize(width, height);
 			printf("grabber->SetFrameSize = %d\n", (int)rc1);
-			
+
 			if(!rc)
 				rc = grabber->Open(deviceName, FALSE);
 		}
 
 		if (NoDevice || !rc
-//			|| !grabber->SetColourFormatConverter("YUV420P") 
-//			|| !grabber->Open(deviceName, FALSE) 
+//			|| !grabber->SetColourFormatConverter("YUV420P")
+//			|| !grabber->Open(deviceName, FALSE)
 //			|| !grabber->SetFrameSize(width, height)
-			) 
+			)
 		{
 			if(!NoDevice)
 			{
@@ -398,7 +393,7 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 				PTRACE(1, "Failed to open or configure the video device \"" << deviceName << '"');
 			}
 
-			if(grabber) 
+			if(grabber)
 				delete grabber;
 			grabber = PVideoInputDevice::CreateDevice("FakeVideo");
 			grabber->SetColourFormat("YUV420P");
@@ -408,12 +403,12 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 			grabber->SetChannel(4);
 		}
 
-		if(videoFramesPS >0 && videoFramesPS<30) 
+		if(videoFramesPS >0 && videoFramesPS<30)
 			grabber->SetFrameRate(videoFramesPS);
 
 		bool curVFlip = config.GetBoolean(VideoOutVFlipConfigKey, FALSE);
 		grabber->SetVFlipState(curVFlip);
-		
+
 		grabber->Start();
 
 		channel->AttachVideoReader(grabber);
@@ -422,12 +417,12 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 	else
 	{
 		// Receiver part
-		if(!autoStartReceiveVideo) 
+		if(!autoStartReceiveVideo)
 			return FALSE;
 		bool curVFlip = config.GetBoolean(VideoInVFlipConfigKey, FALSE);
 		bool curHFlip = config.GetBoolean(VideoInHFlipConfigKey, FALSE);
 
-		displayDevice = new CVideoOutputDevice( 
+		displayDevice = new CVideoOutputDevice(
 			this, curVFlip, curHFlip, FALSE, localVideo);
 	}
 
@@ -475,22 +470,22 @@ void CMyPhoneEndPoint::OnRTPStatistics(const H323Connection &connection, const R
 		m_stat.ibSent = abSent;
 		m_stat.ibRcvd = abRcvd;
 	}
-	
+
 	// Getting Video statistic part
 	RTP_Session * vsession = connection.GetSession(RTP_Session::DefaultVideoSessionID);
 	if (vsession != NULL)
 	{
 		int vbSent=0, vbRcvd=0;
-		// If not sending or receiving Vidio 
+		// If not sending or receiving Vidio
 		// mamory read error happends.
 		try{	vbSent = vsession->GetOctetsSent();	} catch(...) {vbSent = 0;}
 		try{	vbRcvd = vsession->GetOctetsReceived(); } catch(...) {vbRcvd = 0;}
 		m_stat.ibSent += vbSent;
 		m_stat.ibRcvd += vbRcvd;
 	}
-	
+
 	m_stat.iDelay = connection.GetRoundTripDelay().GetInterval();
-	
+
 	m_stat.iSecs = (PTime() - connection.GetConnectionStartTime()).GetSeconds();
 
 	m_dialog->ShowStats();
@@ -508,11 +503,11 @@ void CMyPhoneEndPoint::TranslateTCPAddress(PIPSocket::Address &localAddr, const 
 H323Connection * CMyPhoneEndPoint::CreateConnection(unsigned refID)
 {
 	puts("CMyPhoneEndPoint::CreateConnection");
-	
+
 	//if(m_dialog->autohideVideoPan && m_dialog->showVideoPan )
-		
+
 	emit signal_CreateConnection();
-	
+
 	return new CMyPhoneConnection(m_dialog, *this, refID, 0);
 }
 
@@ -530,7 +525,7 @@ void CMyPhoneEndPoint::OnLogicalChannel(const H323Channel & channel, char *txStr
 			: capability.GetRxFramesInPacket();
 		frames.sprintf(" (%u frames)", numFrames);
 	}
-	
+
 	QString msg;
 
 	switch (channel.GetDirection())
@@ -538,15 +533,15 @@ void CMyPhoneEndPoint::OnLogicalChannel(const H323Channel & channel, char *txStr
     case H323Channel::IsTransmitter :
 		msg = QString(txStrID).arg((const char *)name).arg((const char *)frames);
 		break;
-		
+
     case H323Channel::IsReceiver :
 		msg = QString(rxStrID).arg((const char *)name).arg((const char *)frames);
 		break;
-		
+
     default:
 		break;
 	}
-		
+
 	emit signal_OutputMsg(msg);
 }
 
@@ -558,7 +553,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 	capabilities.RemoveAll();
 
 	// Add the codecs we know about
-	AddAllCapabilities(0, 0, "*"); 
+	AddAllCapabilities(0, 0, "*");
 
 
 	// Удаляю не поддерживаемые видео кодеки из реестра
@@ -567,13 +562,13 @@ void CMyPhoneEndPoint::LoadCapabilities()
 	{
 		PString key = psprintf("%u", ++videoNum);
 		PString name = config.GetString(VideoCodecsConfigSection, key, "");
-		if (name.IsEmpty()) 
+		if (name.IsEmpty())
 			break;
 
 		PINDEX suffixPos = name.Find(OnCodecSuffix);
-		if (suffixPos != P_MAX_INDEX) 
+		if (suffixPos != P_MAX_INDEX)
 			name.Delete(suffixPos, P_MAX_INDEX);
-		else 
+		else
 		{
 			suffixPos = name.Find(OffCodecSuffix);
 			name.Delete(suffixPos, P_MAX_INDEX);
@@ -588,7 +583,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 				{ res = 1; break; }
 			}
 		}
-		if(res == 0) 
+		if(res == 0)
 		{
 			PINDEX j = videoNum; videoNum--;
 			for (;;)
@@ -615,7 +610,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 			{
 				PString key = psprintf("%u", ++codecNum);
 				PString name = config.GetString(VideoCodecsConfigSection, key, "");
-				if (name.IsEmpty()) break;   
+				if (name.IsEmpty()) break;
 
 				suffix = 0;
 				PINDEX suffixPos = name.Find(OnCodecSuffix);
@@ -647,9 +642,9 @@ void CMyPhoneEndPoint::LoadCapabilities()
 		if (name.IsEmpty()) break;
 
 		PINDEX suffixPos = name.Find(OnCodecSuffix);
-		if (suffixPos != P_MAX_INDEX) 
+		if (suffixPos != P_MAX_INDEX)
 			name.Delete(suffixPos, P_MAX_INDEX);
-		else 
+		else
 		{
 			suffixPos = name.Find(OffCodecSuffix);
 			name.Delete(suffixPos, P_MAX_INDEX);
@@ -664,7 +659,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 				{ res = 1; break; }
 			}
 		}
-		if(res == 0) 
+		if(res == 0)
 		{
 			PINDEX j = audioNum; audioNum--;
 			for (;;)
@@ -690,7 +685,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 			{
 				PString key = psprintf("%u", ++codecNum);
 				PString name = config.GetString(CodecsConfigSection, key, "");
-				if (name.IsEmpty()) break;   
+				if (name.IsEmpty()) break;
 
 				suffix = 0;
 				PINDEX suffixPos = name.Find(OnCodecSuffix);
@@ -734,14 +729,14 @@ void CMyPhoneEndPoint::LoadCapabilities()
 	// changing audio codecs
 	PStringArray enabledCodecs;
 	PINDEX codecNum = 0;
-	for (;;) 
+	for (;;)
 	{
 		PString key = psprintf("%u", ++codecNum);
 		PString name = config.GetString(CodecsConfigSection, key, "");
 		if (name.IsEmpty()) break;
 
 		PINDEX suffixPos = name.Find(OffCodecSuffix);
-		if (suffixPos != P_MAX_INDEX) 
+		if (suffixPos != P_MAX_INDEX)
 		{
 			capabilities.Remove(name(0, suffixPos-1));
 			continue;
@@ -753,7 +748,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 	}
 
 	codecNum = 0;
-	for (;;) 
+	for (;;)
 	{
 		PString key = psprintf("%u", ++codecNum);
 		PString name = config.GetString(VideoCodecsConfigSection, key, "");
@@ -764,21 +759,21 @@ void CMyPhoneEndPoint::LoadCapabilities()
 
 	int tvNum = 0;
 	codecNum = 0;
-	for (;;) 
+	for (;;)
 	{
 		PString key = psprintf("%u", ++codecNum);
 		PString name = config.GetString(VideoCodecsConfigSection, key, "");
 		if (name.IsEmpty()) break;
 
-		// удаление отключенных кодеков		
+		// удаление отключенных кодеков
 		PINDEX suffixPos = name.Find(OffCodecSuffix);
-		if (suffixPos != P_MAX_INDEX) 
+		if (suffixPos != P_MAX_INDEX)
 		{
 			capabilities.Remove(name(0, suffixPos-1)); continue;
 		}
 		// удаление суффикса on из имени кодека
 		suffixPos = name.Find(OnCodecSuffix);
-		if (suffixPos != P_MAX_INDEX)	
+		if (suffixPos != P_MAX_INDEX)
 			name.Delete(suffixPos, P_MAX_INDEX);
 
 		// проверка кодека на соответствие размеру принимаемой картинки
@@ -804,9 +799,9 @@ void CMyPhoneEndPoint::LoadCapabilities()
 		default:
 			break;
 		}
-		if(suffixPos == P_MAX_INDEX) 
+		if(suffixPos == P_MAX_INDEX)
 			enabledCodecs.AppendString(name);
-		else 
+		else
 			capabilities.Remove(name);
 
 		// проверка кодека на соответствие размеру отправляемой картинки
@@ -843,7 +838,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 	// Reorder the codecs we have
 	capabilities.Reorder(enabledCodecs);
 
-	for (PINDEX i = 0; i < capabilities.GetSize(); i++) 
+	for (PINDEX i = 0; i < capabilities.GetSize(); i++)
 	{
 		if (capabilities[i].GetMainType() == H323Capability::e_Video)
 		{
@@ -871,26 +866,26 @@ void H323Capability::SetMediaFormatOptionInteger(const PString &name, int val)
 void H323GenericCapabilityInfo::SetMaxBitRate(unsigned bitrate)
 {
 	maxBitRate = bitrate;
-}  
+}
 */
 bool CMyPhoneEndPoint::FindGatekeeper()
 {
 	QString msg;
-	if (GetGatekeeper() != NULL) 
+	if (GetGatekeeper() != NULL)
 	{
 		if (gatekeeper->IsRegistered()) // If registered, then unregister
 		{
 			msg = QString("Покидаем Гейткипер: %1").arg((const char *)gatekeeper->GetName());
-			emit signal_OutputMsg(msg);	
+			emit signal_OutputMsg(msg);
 		}
 		RemoveGatekeeper();
 	}
-	
+
 	if (!config.GetBoolean(UseGatekeeperConfigKey, FALSE))
 		return TRUE;
-	
+
 	SetGatekeeperPassword(config.GetString(GatekeeperPassConfigKey));
-	
+
 	PString gkHost = config.GetString(GatekeeperHostConfigKey, "");
 	PString gkid = config.GetString(GatekeeperIdConfigKey, "");
 	PString iface = "";
@@ -916,20 +911,20 @@ bool CMyPhoneEndPoint::FindGatekeeper()
 	}
 
 	msg = QString("Ищем Гейткипер.... Пожалуйста, подождите!");
-	emit signal_OutputMsg(msg);	
-	if (UseGatekeeper(gkHost, gkid, iface)) 
+	emit signal_OutputMsg(msg);
+	if (UseGatekeeper(gkHost, gkid, iface))
 	{
 		msg = QString("Успешно зарегистрировались на Гейткипере: %1").arg((const char *)gatekeeper->GetName());
-		emit signal_OutputMsg(msg);	
+		emit signal_OutputMsg(msg);
 	}
-	
+
 	bool gkRequired = config.GetBoolean(RequireGatekeeperConfigKey, FALSE);
-	
+
 	msg = "";
 	if (GetGatekeeper() != NULL)
 	{
 		unsigned reason = gatekeeper->GetRegistrationFailReason();
-		switch (reason) 
+		switch (reason)
 		{
 		case H323Gatekeeper::InvalidListener :
 			msg = QString("ОШИБКА! Гейткипер отказал в слушающем порте.");
@@ -964,7 +959,7 @@ bool CMyPhoneEndPoint::FindGatekeeper()
 				msg = QString("ОШИБКА! Не могу найти Гейткипер на %2.")
 					.arg((const char *)gkHost);
 		}
-		else 
+		else
 		{
 			if (!gkid.IsEmpty())
 				msg = QString("ОШИБКА! Не могу найти Гейткипер с ID %1 в сети.")
@@ -981,15 +976,15 @@ bool CMyPhoneEndPoint::FindGatekeeper()
 
 	if(!msg.isEmpty())
 		emit signal_OutputMsg(msg);
-	
-	return !gkRequired; 
+
+	return !gkRequired;
 }
 
 void CMyPhoneEndPoint::OutputMsg(const QString &txt)
 {
 	emit signal_OutputMsg(txt);
 }
-	
+
 void CMyPhoneEndPoint::OutputUsrMsg(const QString &txt)
 {
 	emit signal_OutputUsrMsg(txt);
@@ -1015,7 +1010,7 @@ void CMyPhoneConnection::OnUserInputString(const PString & value)
 {
 	QString msg = QString("<-%1: ""%2""").arg(m_dialog->FindContactName(*this)).arg((const char*)value);
 	endpoint.OutputUsrMsg(msg);
-} 
+}
 /*
 void CMyPhoneConnection::SelectDefaultLogicalChannel(
       unsigned sessionID    ///< Session ID to find default logical channel.
@@ -1023,16 +1018,16 @@ void CMyPhoneConnection::SelectDefaultLogicalChannel(
 {
 	puts("CMyPhoneConnection::SelectDefaultLogicalChannel");
 	if (FindChannel (sessionID, FALSE))
-		return; 
+		return;
 
 	if(sessionID == RTP_Session::DefaultVideoSessionID)
 	{
 		if(endpoint.tvCaps==NULL)
 		{
-			for (PINDEX i = 0; i < remoteCapabilities.GetSize(); i++) 
+			for (PINDEX i = 0; i < remoteCapabilities.GetSize(); i++)
 			{
 				H323Capability & remoteCapability = remoteCapabilities[i];
-				if (remoteCapability.GetDefaultSessionID() == sessionID) 
+				if (remoteCapability.GetDefaultSessionID() == sessionID)
 				{
 //					if(remoteCapabilities.FindCapability(remoteCapability,sessionID)==TRUE)
 					{
@@ -1046,7 +1041,7 @@ void CMyPhoneConnection::SelectDefaultLogicalChannel(
 		else
 		{
 			H323Capability * remoteCapability = remoteCapabilities.SelectRemoteCapabilty(sessionID,endpoint.tvCaps);
-			if(remoteCapability==NULL) 
+			if(remoteCapability==NULL)
 				return;
 			PTRACE(2, "H245\tOpenLogicalChannel " << *remoteCapability);
 			OpenLogicalChannel(*remoteCapability, sessionID, H323Channel::IsTransmitter);
@@ -1059,4 +1054,3 @@ void CMyPhoneConnection::SelectDefaultLogicalChannel(
 }
 */
 //////////////////////////////////////////////////////////////////////
-
