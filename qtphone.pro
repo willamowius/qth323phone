@@ -20,11 +20,15 @@ CONFIG += warn_off release
 DEPENDPATH += .
 INCLUDEPATH += /usr/local/include/ptlib \
 		/usr/local/include/openh323 \
+		$(PTLIBDIR)/include \
+		$(OPENH323DIR)/include \
 		.
 
 LIBS += -L/usr/local/lib \
+	-L$(PTLIBDIR)/lib_linux_x86_64 \
+	-L$(OPENH323DIR)/lib \
 	-lpt \
-	-lopenh323
+	-lh323_linux_x86_64_
 
 QT += xml
 
