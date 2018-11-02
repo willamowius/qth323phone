@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="qth323phone" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="all">
+				<Option platforms="Unix;" />
+				<Option output="bin/qth323phone" prefix_auto="0" extension_auto="0" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+			</Target>
+		</Build>
+		<Unit filename="Makefile" />
+		<Unit filename="QtPhone.rc" />
+		<Unit filename="README.md" />
+		<Unit filename="caddrbook.cpp" />
+		<Unit filename="caddrbook.h" />
+		<Unit filename="caddrbook.ui" />
+		<Unit filename="contacts.ini" />
+		<Unit filename="csettingsdlg.cpp" />
+		<Unit filename="csettingsdlg.h" />
+		<Unit filename="csettingsdlg.ui" />
+		<Unit filename="cvideodevice.cpp" />
+		<Unit filename="cvideodevice.h" />
+		<Unit filename="cvideodlg.cpp" />
+		<Unit filename="cvideodlg.h" />
+		<Unit filename="cvideodlg.ui" />
+		<Unit filename="global.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="myphoneendpoint.cpp" />
+		<Unit filename="myphoneendpoint.h" />
+		<Unit filename="qtphone.pro" />
+		<Unit filename="qtphone.qrc" />
+		<Unit filename="qtphone.sh" />
+		<Unit filename="qtphone.ui" />
+		<Unit filename="qtphonedlg.cpp" />
+		<Unit filename="qtphonedlg.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
