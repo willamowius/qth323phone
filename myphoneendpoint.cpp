@@ -17,7 +17,7 @@ CMyPhoneEndPoint::CMyPhoneEndPoint()
 {
 	puts("=============PVideoInputDevice::GetDriverNames()================");
 	PStringList drvNames = PVideoInputDevice::GetDriverNames();
-	for(int i=0;i<drvNames.GetSize();i++)
+	for(int i = 0; i < drvNames.GetSize(); i++)
 	{
 		puts((const char*)drvNames[i]);
 	}
@@ -25,7 +25,10 @@ CMyPhoneEndPoint::CMyPhoneEndPoint()
 
 	m_dialog = NULL;
 	m_vdlg = NULL;
-	m_stat.iSecs=0;  m_stat.ibSent=0;  m_stat.ibRcvd=0;  m_stat.iDelay=0;
+	m_stat.iSecs = 0;
+	m_stat.ibSent = 0;
+	m_stat.ibRcvd = 0;
+	m_stat.iDelay = 0;
 	m_router = NULL;
 	localVideo = FALSE;
 }
@@ -38,7 +41,7 @@ CMyPhoneEndPoint::~CMyPhoneEndPoint()
 bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 {
 	m_dialog = dlg;
-	m_vdlg=new CVideoDlg(m_dialog);
+	m_vdlg = new CVideoDlg(m_dialog);
 
 	//////////////////////////// PConfig ////////////////////////////
 	SetAudioJitterDelay(50, config.GetInteger(JitterConfigKey, 50)); //GetMaxAudioJitterDelay()));
@@ -47,13 +50,13 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 	// UserInput mode
     // Backward compatibility configuration entry
     unsigned mode = H323Connection::SendUserInputAsString;
-	m_fDtmfAsString=true;
+	m_fDtmfAsString = true;
     if (config.HasKey(DtmfAsStringConfigKey))
 	{
 		if (!config.GetBoolean(DtmfAsStringConfigKey))
 		{
 			mode = H323Connection::SendUserInputAsTone;
-			m_fDtmfAsString=false;
+			m_fDtmfAsString = false;
 		}
 		config.DeleteKey(DtmfAsStringConfigKey);
 	}
@@ -65,36 +68,35 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 	puts("=============pluginMgr.GetPluginsProviding(PSoundChannel)================");
 	//PStringList drvNames = PVideoInputDevice::GetDriverNames();
 	PStringList listA = pluginMgr.GetPluginsProviding("PSoundChannel");
-	for(i=0;i<listA.GetSize();i++)
+	for(i = 0; i < listA.GetSize(); i++)
 	{
 		puts((const char*)listA[i]);
-		if(i==0)
-		{
+		if(i == 0) {
 			SetSoundChannelPlayDriver(listA[i]);
 			SetSoundChannelRecordDriver(listA[i]);
 		}
 	}
 	puts("=============pluginMgr.GetPluginsProviding(*)================");
 	listA = pluginMgr.GetPluginsProviding("*");
-	for(i=0;i<listA.GetSize();i++)
+	for(i = 0; i < listA.GetSize(); i++)
 	{
 		puts((const char*)listA[i]);
 	}
 	puts("========================PSoundChannel==================================");
 	listA = pluginMgr.GetPluginsDeviceNames("*", "PSoundChannel");
-	for(i=0;i<listA.GetSize();i++)
+	for(i = 0; i < listA.GetSize(); i++)
 	{
 		puts((const char*)listA[i]);
 	}
 	puts("==========================PVideoInputDevice================================");
 	listA = pluginMgr.GetPluginsDeviceNames("*", "PVideoInputDevice");
-	for(i=0;i<listA.GetSize();i++)
+	for(i = 0; i < listA.GetSize(); i++)
 	{
 		puts((const char*)listA[i]);
 	}
 	puts("==========================PVideoOutputDevice================================");
 	listA = pluginMgr.GetPluginsDeviceNames("*", "PVideoOutputDevicel");
-	for(i=0;i<listA.GetSize();i++)
+	for(i = 0; i < listA.GetSize(); i++)
 	{
 		puts((const char*)listA[i]);
 	}
@@ -134,7 +136,7 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 	aliases = QString((const char *)config.GetString(AliasConfigKey, ""));
 	puts(aliases.toAscii().data());
 	aliases.simplified();
-	int iPos=0;
+	int iPos = 0;
 	while ((iPos = aliases.indexOf("|"))>0)  // loading user aliases
 	{
 		alias = aliases.left(iPos);
@@ -233,10 +235,10 @@ void CMyPhoneEndPoint::OnConnectionCleared(H323Connection & connection, const PS
 		return;
 
 	// clearing statistic
-	m_stat.iSecs=0;
-	m_stat.ibSent=0;
-	m_stat.ibRcvd=0;
-	m_stat.iDelay=0;
+	m_stat.iSecs = 0;
+	m_stat.ibSent = 0;
+	m_stat.ibRcvd = 0;
+	m_stat.iDelay = 0;
 
 	// UI change
 	emit signal_OnConnectionCleared(m_dialog->FindContactName(connection));
@@ -274,7 +276,7 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 			suffixPos = cname.Find("H.261");
 
 		int videoSize = config.GetInteger(VideoOutSizeConfigKey, 2);
-		int width=352, height=288;
+		int width = 352, height = 288;
 
 		suffixPos = P_MAX_INDEX;
 		switch(videoSize)
