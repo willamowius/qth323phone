@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CAddrBook</class>
+ <widget class="QDialog" name="CAddrBook">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>337</width>
+    <height>349</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Список контактов</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qtphone.qrc">
+    <normaloff>:/images/Resources/teleph.png</normaloff>:/images/Resources/teleph.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>1</number>
+   </property>
+   <property name="spacing">
+    <number>1</number>
+   </property>
+   <item row="0" column="0" rowspan="3">
+    <widget class="QTableWidget" name="tbl">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Имя</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Адрес</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QToolButton" name="cmdAdd">
+     <property name="toolTip">
+      <string>Добавить контакт</string>
+     </property>
+     <property name="statusTip">
+      <string>Добавить контакт</string>
+     </property>
+     <property name="whatsThis">
+      <string>Добавить контакт</string>
+     </property>
+     <property name="accessibleName">
+      <string>Добавить контакт</string>
+     </property>
+     <property name="accessibleDescription">
+      <string>Добавить контакт</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="qtphone.qrc">
+       <normaloff>:/images/Resources/plus_add.png</normaloff>:/images/Resources/plus_add.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QToolButton" name="cmdDel">
+     <property name="toolTip">
+      <string>Удалить контакт</string>
+     </property>
+     <property name="statusTip">
+      <string>Удалить контакт</string>
+     </property>
+     <property name="whatsThis">
+      <string>Удалить контакт</string>
+     </property>
+     <property name="accessibleName">
+      <string>Удалить контакт</string>
+     </property>
+     <property name="accessibleDescription">
+      <string>Удалить контакт</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="qtphone.qrc">
+       <normaloff>:/images/Resources/minus_del.png</normaloff>:/images/Resources/minus_del.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>272</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="qtphone.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>CAddrBook</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>168</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>CAddrBook</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>168</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CSettingsDlg</class>
+ <widget class="QDialog" name="CSettingsDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>389</width>
+    <height>353</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Установки</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qtphone.qrc">
+    <normaloff>:/images/Resources/teleph.png</normaloff>:/images/Resources/teleph.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="spacing">
+    <number>1</number>
+   </property>
+   <property name="margin">
+    <number>1</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Основные</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Пользователь</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Имя пользователя:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="IDS_UNAMESTR"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="IDS_AANSWERSTR">
+         <property name="text">
+          <string>Авто-ответ</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="IDS_DTMFSTRSTR">
+         <property name="text">
+          <string>DTMF как строку</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="IDS_D242STR">
+         <property name="text">
+          <string>Не туннелировать H245</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="IDS_DFSTARTSTR">
+         <property name="text">
+          <string>Отключить Fast-Start</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetFixedSize</enum>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Звук вызова:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="IDS_RINGFSTR"/>
+         </item>
+         <item>
+          <widget class="QToolButton" name="IDS_RINGFCMD">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="IDS_RINGFCMDP">
+           <property name="toolTip">
+            <string>Прослушать</string>
+           </property>
+           <property name="statusTip">
+            <string>Прослушать</string>
+           </property>
+           <property name="whatsThis">
+            <string>Прослушать</string>
+           </property>
+           <property name="text">
+            <string>Прослушать</string>
+           </property>
+           <property name="icon">
+            <iconset resource="qtphone.qrc">
+             <normaloff>:/images/Resources/sound_button.png</normaloff>:/images/Resources/sound_button.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Сеть</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Тип сети:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="3">
+        <widget class="QComboBox" name="IDS_BANDSTR">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <item>
+          <property name="text">
+           <string>LAN</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>LAN_2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>LAN_3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>LAN_4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>LAN_5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>LAN_6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>LAN_7</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QLabel" name="label_4">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Кб/с</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>RTP порт мин:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QSpinBox" name="IDS_RTPBSTR">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>36767</number>
+         </property>
+         <property name="value">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3" colspan="2">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>RTP порт макс.:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5" colspan="2">
+        <widget class="QSpinBox" name="IDS_RTPMSTR">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>36767</number>
+         </property>
+         <property name="value">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>52</width>
+           <height>151</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>NAT роутер:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2" colspan="5">
+        <widget class="QLineEdit" name="IDS_NATRSTR"/>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Локал. и-фейсы:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2" colspan="5">
+        <widget class="QLineEdit" name="IDS_LOCISTR"/>
+       </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Тип IP сервиса:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2" colspan="4">
+        <widget class="QLineEdit" name="IDS_IPTSTR">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="6">
+        <widget class="QLabel" name="label_10">
+         <property name="maximumSize">
+          <size>
+           <width>26</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>(hex)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4" colspan="2">
+        <widget class="QLineEdit" name="IDS_KBSSTR">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Гейткипер</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="IDS_GKUSESTR">
+         <property name="text">
+          <string>Использ. Гейткипер</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="IDS_GKRECSTR">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Гейткипер обязателен</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="title">
+          <string>Искать Гейткипер</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="margin">
+           <number>1</number>
+          </property>
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="IDS_GKAUTOLOCSTR">
+            <property name="text">
+             <string>Авто поиск</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>ГК пароль:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLineEdit" name="IDS_GKPASSSTR">
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="IDS_GKHOSTLOCSTR">
+            <property name="text">
+             <string>Искать по хосту:</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QLineEdit" name="IDS_GKHOSTLOCSTR_STR"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QRadioButton" name="IDS_GKIDLOCSTR">
+            <property name="text">
+             <string>Искать по ID:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QLineEdit" name="IDS_GKIDLOCSTR_STR">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Псевдонимы пользователя</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <property name="margin">
+           <number>1</number>
+          </property>
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>Псевдоним:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="3">
+             <widget class="QLineEdit" name="IDS_UALIASSTR"/>
+            </item>
+            <item row="1" column="0">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>58</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="IDS_UALADDSTR">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>9</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>34</width>
+                <height>17</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Доб.</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>18</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="3">
+             <widget class="QPushButton" name="IDS_UALDELSTR">
+              <property name="maximumSize">
+               <size>
+                <width>34</width>
+                <height>17</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Убр.</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QListWidget" name="IDS_UALIASESSTR"/>
+          </item>
+          <item row="1" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>102</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Звук</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Устр. вывода:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="IDS_OUTDEVSTR"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Устр. ввода:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="IDS_INDEVSTR"/>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>Буфер:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="IDS_BUFFSTR">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>20</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>Джитер:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="IDS_JITSTR">
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>999</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>ms</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="IDS_SLSTR">
+           <property name="text">
+            <string>Детектор тишины</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Выбор кодеков</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <property name="margin">
+           <number>1</number>
+          </property>
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <item row="0" column="0" rowspan="5">
+           <widget class="QListWidget" name="IDS_CADECSSTR"/>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QPushButton" name="IDS_CSDOWNSTR">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>21</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>вниз</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2" rowspan="2">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>31</width>
+              <height>57</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="IDS_CHKAES">
+            <property name="text">
+             <string>AES включено</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="IDS_CSENBLSTR">
+            <property name="text">
+             <string>Вкл</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2" colspan="2">
+           <widget class="QPushButton" name="IDS_CSUPSTR">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>21</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>вверх</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>Видео</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_10">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_18">
+         <property name="maximumSize">
+          <size>
+           <width>31</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Устр.:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="4">
+        <widget class="QComboBox" name="IDS_DEVSTR"/>
+       </item>
+       <item row="0" column="6">
+        <widget class="QComboBox" name="IDS_DEVCHSTR">
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="IDS_VSENDSTR">
+         <property name="text">
+          <string>Отправлять видео</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4" rowspan="3" colspan="3">
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="title">
+          <string>Настройки видео</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <property name="margin">
+           <number>1</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="IDS_LVFLIPSTR">
+            <property name="text">
+             <string>В-Зерк. исход.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="IDS_RVFLIPSTR">
+            <property name="text">
+             <string>В-Зерк. вход.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QCheckBox" name="IDS_VRCVDSTR">
+         <property name="text">
+          <string>Получать видео</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QCheckBox" name="IDS_VLOCSTR">
+         <property name="text">
+          <string>Показывать локал.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Размер:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" colspan="2">
+        <widget class="QComboBox" name="IDC_VSIZE"/>
+       </item>
+       <item row="4" column="4" colspan="3">
+        <widget class="QSpinBox" name="IDC_BPSSTATIC">
+         <property name="maximum">
+          <number>99999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="7">
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="title">
+          <string>Параметры передачи</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <property name="margin">
+           <number>1</number>
+          </property>
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_23">
+            <property name="text">
+             <string>Размер:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QComboBox" name="IDC_VSIZE2"/>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_22">
+            <property name="text">
+             <string>kbit/s:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QSpinBox" name="IDC_BPSSTATIC2">
+            <property name="maximum">
+             <number>99999</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_24">
+            <property name="text">
+             <string>Кач-во:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="IDS_QTYSTR">
+            <property name="maximum">
+             <number>31</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>182</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="label_25">
+            <property name="text">
+             <string>fps:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QSpinBox" name="IDC_FPSSTATIC">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>30</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="7">
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>Выбор кодеков</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <property name="margin">
+           <number>1</number>
+          </property>
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <item row="0" column="0" rowspan="5">
+           <widget class="QListWidget" name="IDS_VCADECSSTR"/>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QPushButton" name="IDS_VCSDOWNSTR">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>21</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>вниз</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2" rowspan="2">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>31</width>
+              <height>46</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="IDS_VCSENBLSTR">
+            <property name="text">
+             <string>Вкл</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2" colspan="2">
+           <widget class="QPushButton" name="IDS_VCSUPSTR">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>21</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>вверх</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLabel" name="label_19">
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Кнл</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <widget class="QLabel" name="label_21">
+         <property name="text">
+          <string>kbit/s:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_6">
+      <attribute name="title">
+       <string>Интерфейс</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="qtphone.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>CSettingsDlg</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>194</x>
+     <y>339</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>CSettingsDlg</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>194</x>
+     <y>339</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

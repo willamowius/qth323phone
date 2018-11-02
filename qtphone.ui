@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QtPhoneClass</class>
+ <widget class="QMainWindow" name="QtPhoneClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>582</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Терминал видеоконференции</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qtphone.qrc">
+    <normaloff>:/images/Resources/logo.png</normaloff>:/images/Resources/logo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>1</number>
+    </property>
+    <property name="margin">
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>управление</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="margin">
+         <number>1</number>
+        </property>
+        <property name="spacing">
+         <number>1</number>
+        </property>
+        <item row="0" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLineEdit" name="txtAddress"/>
+          </item>
+          <item>
+           <widget class="QToolButton" name="cmdContactsList">
+            <property name="toolTip">
+             <string>Список контактов</string>
+            </property>
+            <property name="statusTip">
+             <string>Список контактов</string>
+            </property>
+            <property name="whatsThis">
+             <string>Список контактов</string>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdCall">
+            <property name="text">
+             <string>Звонить</string>
+            </property>
+            <property name="icon">
+             <iconset resource="qtphone.qrc">
+              <normaloff>:/images/Resources/bell.png</normaloff>:/images/Resources/bell.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdRefuse">
+            <property name="text">
+             <string>Отменить</string>
+            </property>
+            <property name="icon">
+             <iconset resource="qtphone.qrc">
+              <normaloff>:/images/Resources/refuse.png</normaloff>:/images/Resources/refuse.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QToolButton" name="cmdMuteSpeaker">
+          <property name="toolTip">
+           <string>Выкл звук</string>
+          </property>
+          <property name="statusTip">
+           <string>Выкл звук</string>
+          </property>
+          <property name="whatsThis">
+           <string>Выкл звук</string>
+          </property>
+          <property name="text">
+           <string>Выкл звук</string>
+          </property>
+          <property name="icon">
+           <iconset resource="qtphone.qrc">
+            <normaloff>:/images/Resources/sound_button.png</normaloff>:/images/Resources/sound_button.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QProgressBar" name="prBarSound">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QToolButton" name="cmdMuteMicrophone">
+          <property name="toolTip">
+           <string>Выкл микр</string>
+          </property>
+          <property name="statusTip">
+           <string>Выкл микр</string>
+          </property>
+          <property name="whatsThis">
+           <string>Выкл микр</string>
+          </property>
+          <property name="text">
+           <string>Выкл микр</string>
+          </property>
+          <property name="icon">
+           <iconset resource="qtphone.qrc">
+            <normaloff>:/images/Resources/mike_p1.png</normaloff>:/images/Resources/mike_p1.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QProgressBar" name="prBarMic">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QGroupBox" name="pnlMsg">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <property name="margin">
+            <number>1</number>
+           </property>
+           <property name="spacing">
+            <number>1</number>
+           </property>
+           <item row="0" column="0" colspan="2">
+            <widget class="QSplitter" name="splitter">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <widget class="QListWidget" name="listMsg_2"/>
+             <widget class="QPlainTextEdit" name="txtSendMsg"/>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>277</width>
+               <height>17</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="cmdSendMsg">
+             <property name="text">
+              <string>Отправить</string>
+             </property>
+             <property name="icon">
+              <iconset resource="qtphone.qrc">
+               <normaloff>:/images/Resources/messageadd.png</normaloff>:/images/Resources/messageadd.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>протокол</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="margin">
+         <number>1</number>
+        </property>
+        <property name="spacing">
+         <number>1</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QListWidget" name="listMsg"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actSetup"/>
+    <addaction name="actShowVideo"/>
+    <addaction name="actExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+    <addaction name="actAbout"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actSetup">
+   <property name="icon">
+    <iconset resource="qtphone.qrc">
+     <normaloff>:/images/Resources/teleph.png</normaloff>:/images/Resources/teleph.png</iconset>
+   </property>
+   <property name="text">
+    <string>Установки</string>
+   </property>
+  </action>
+  <action name="actRestore">
+   <property name="icon">
+    <iconset resource="qtphone.qrc">
+     <normaloff>:/images/Resources/qcam_p1.png</normaloff>:/images/Resources/qcam_p1.png</iconset>
+   </property>
+   <property name="text">
+    <string>Открыть</string>
+   </property>
+   <property name="toolTip">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="actExit">
+   <property name="icon">
+    <iconset resource="qtphone.qrc">
+     <normaloff>:/images/Resources/msgbox4.png</normaloff>:/images/Resources/msgbox4.png</iconset>
+   </property>
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="actRefuse">
+   <property name="icon">
+    <iconset resource="qtphone.qrc">
+     <normaloff>:/images/Resources/refuse.png</normaloff>:/images/Resources/refuse.png</iconset>
+   </property>
+   <property name="text">
+    <string>Закончить разговор</string>
+   </property>
+   <property name="toolTip">
+    <string>Закончить разговор</string>
+   </property>
+  </action>
+  <action name="actShowVideo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="qtphone.qrc">
+     <normaloff>:/images/Resources/qcam_p1.png</normaloff>:/images/Resources/qcam_p1.png</iconset>
+   </property>
+   <property name="text">
+    <string>Показать видео</string>
+   </property>
+   <property name="toolTip">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="actAbout">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+   <property name="toolTip">
+    <string>О программе</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="qtphone.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,20 @@
+<RCC>
+  <qresource prefix="images">
+    <file>Resources/plus_add.png</file>
+    <file>Resources/minus_del.png</file>
+    <file>Resources/sound_button_2.png</file>
+    <file>Resources/mike_p2.png</file>
+    <file>Resources/msgbox4.png</file>
+    <file>Resources/messageadd.png</file>
+    <file>Resources/mike_p1.png</file>
+    <file>Resources/qcam_p1.png</file>
+    <file>Resources/qcam_p2.png</file>
+    <file>Resources/refuse.png</file>
+    <file>Resources/sound_button.png</file>
+    <file>Resources/speakn.png</file>
+    <file>Resources/bell.png</file>
+    <file>Resources/teleph.png</file>
+    <file>Resources/teleph2.png</file>
+    <file>Resources/logo.png</file>
+  </qresource>
+</RCC>
