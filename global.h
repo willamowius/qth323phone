@@ -17,8 +17,8 @@ const int progMinorVersion = 1;
 const int progBuildVersion = 0;
 const char strProgPostfix[]="";
 const char strProgAuthor[]="H323plus project (support@h323plus.org)";
-const char strProgWeb[]="http://h323plus.org/";
-const char strProgWebHelp[]="http://h323plus.org/myphone.html";
+const char strProgWeb[]="https://www.h323plus.org/";
+const char strProgWebHelp[]="https://h323plus.org/myphone.html";
 //
 const char strProgRespects[]="\t~~~ Thanks goes to: ~~~\r\n\
 							 * All OpenH323/H323plus developers amd mailing list members\r\n\
@@ -97,12 +97,12 @@ class PluginLoaderStartup2 : public PProcessStartup
   PCLASSINFO(PluginLoaderStartup2, PProcessStartup);
   public:
     void OnStartup()
-    { 
+    {
       // load the actual DLLs, which will also load the system plugins
       PStringArray dirs = PPluginManager::GetPluginDirs();
       PPluginManager & mgr = PPluginManager::GetPluginManager();
       PINDEX i;
-      for (i = 0; i < dirs.GetSize(); i++) 
+      for (i = 0; i < dirs.GetSize(); i++)
         mgr.LoadPluginDirectory(dirs[i]);
 
       // now load the plugin module managers
@@ -134,7 +134,7 @@ class PluginLoaderStartup2 : public PProcessStartup
 };
 /*
 
-class PWLibProcess : public PProcess 
+class PWLibProcess : public PProcess
 {
 	PCLASSINFO(PWLibProcess, PProcess);
 public:

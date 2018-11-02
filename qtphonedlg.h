@@ -37,7 +37,7 @@ public:
 	PString			m_token;
 	QLabel			*m_pLblStat;
 
-   
+
 	PTimer indTimer;
     PDECLARE_NOTIFIER(PTimer, QtPhoneDlg, OnUpdateIndicators);
 
@@ -46,22 +46,22 @@ public:
 
 	void OnUpdateIndicators();
 	void OnRingSoundAgain();
-  
+
 	PString ringSoundFile;
- 
+
 	QString FindContactName(const H323Connection & connection);
-	
+
 	bool hidePnP;
 	bool autoAddInAddr;
 	bool autohideVideoPan;
 	bool showVideoPan;
 	bool hideStat;  // can show stat
-	
+
 	PConfig adrbook;  // PhoneBook file
-	
+
 	void ShowStats() const;
 	int Close();
- 
+
 #if PTRACING	// If Compiled with PTlib Tracing support (like in OpenH323)
 	bool Tracing;
     bool OpenTraceFile(PConfig & config);

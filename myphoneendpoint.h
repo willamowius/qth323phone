@@ -17,10 +17,10 @@ class CVideoDlg;
 // Structure for stored connection statistics
 typedef struct
 {
-	int iSecs;		// talk duration
+	int iSecs;	// talk duration
 	int ibSent;	// bytes sent
 	int ibRcvd;	// bytes received
-	int iDelay;	// rount trip delay
+	int iDelay;	// round trip delay
 } MyStat;
 
 class CMyPhoneEndPoint : public QObject, public H323EndPoint
@@ -29,7 +29,7 @@ class CMyPhoneEndPoint : public QObject, public H323EndPoint
 public:
 	CMyPhoneEndPoint();
 	~CMyPhoneEndPoint();
-	
+
 	QtPhoneDlg		*m_dialog;
 	CVideoDlg		*m_vdlg;
 	PConfig			config;
@@ -54,7 +54,7 @@ public:
 
 
 	bool Initialise(QtPhoneDlg *dlg);
-	void LoadCapabilities(); 
+	void LoadCapabilities();
 
 
 	bool autoStartTransmitVideo;
@@ -75,7 +75,7 @@ public:
 
 	friend class QtPhoneDlg;
 	friend class CMyPhoneConnection;
-	
+
 	void OutputMsg(const QString &);
 	void OutputUsrMsg(const QString &);
 
@@ -105,7 +105,7 @@ class CMyPhoneConnection : public H323Connection
     PBoolean OnAlerting(const H323SignalPDU &, const PString &);
     void OnUserInputString(const PString &);
 
-    //virtual void SelectDefaultLogicalChannel( unsigned sessionID   ); 
+    //virtual void SelectDefaultLogicalChannel( unsigned sessionID   );
   protected:
     CMyPhoneEndPoint		&endpoint;
     QtPhoneDlg			*m_dialog;
