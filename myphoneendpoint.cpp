@@ -152,16 +152,18 @@ bool CMyPhoneEndPoint::Initialise(QtPhoneDlg *dlg)
 	PString interfaces = config.GetString(ListenerInterfaceConfigKey, "*");
 	if(StartListeners(interfaces.Tokenise(',')))
 	{
-		str = QString("%1 готов к приему...").arg(strProgName);
+		str = QString("%1 ready to receive...").arg(strProgName);
 		emit signal_OutputMsg(str);
-		return true;
 	}
 	else
 	{
-		str = QString("ОШИБКА! %1 не готов к приему, интерфейс: %2.").arg(strProgName).arg((const char*)interfaces);
+		str = QString("Error! % 1 not ready to receive interface: %2.").arg(strProgName).arg((const char*)interfaces);
 		emit signal_OutputMsg(str);
 		return false;
 	}
+
+	FindGatekeeper();
+
 	return true;
 }
 
@@ -604,7 +606,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 	{
 		if (capabilities[i].GetMainType() == H323Capability::e_Video)
 		{
-			PINDEX codecNum=0;
+			PINDEX codecNum = 0;
 			int res = 0;
 			int suffix = 0;
 			for (;;)
@@ -859,12 +861,13 @@ void CMyPhoneEndPoint::LoadCapabilities()
 
 bool CMyPhoneEndPoint::FindGatekeeper()
 {
+    puts("-->FindGatekeeper\n");
 	QString msg;
 	if (GetGatekeeper() != NULL)
 	{
 		if (gatekeeper->IsRegistered()) // If registered, then unregister
 		{
-			msg = QString("Покидаем Гейткипер: %1").arg((const char *)gatekeeper->GetName());
+			msg = QString("Leaving Gatekeeper: %1").arg((const char *)gatekeeper->GetName());
 			emit signal_OutputMsg(msg);
 		}
 		RemoveGatekeeper();
@@ -899,11 +902,11 @@ bool CMyPhoneEndPoint::FindGatekeeper()
 		break;
 	}
 
-	msg = QString("Ищем Гейткипер.... Пожалуйста, подождите!");
+	msg = QString("Searching for gatekeeper...please wait!");
 	emit signal_OutputMsg(msg);
 	if (UseGatekeeper(gkHost, gkid, iface))
 	{
-		msg = QString("Успешно зарегистрировались на Гейткипере: %1").arg((const char *)gatekeeper->GetName());
+		msg = QString("Successfully registered on the Gatekeeper: %1").arg((const char *)gatekeeper->GetName());
 		emit signal_OutputMsg(msg);
 	}
 
@@ -916,22 +919,22 @@ bool CMyPhoneEndPoint::FindGatekeeper()
 		switch (reason)
 		{
 		case H323Gatekeeper::InvalidListener :
-			msg = QString("ОШИБКА! Гейткипер отказал в слушающем порте.");
+			msg = QString("Error: Invalid listener.");
 			break;
 		case H323Gatekeeper::DuplicateAlias :
-			msg = QString("ОШИБКА! Ваш псевдоним уже зарегистрирован на Гейткипере.");
+			msg = QString("Error: Duplicate alias");
 			break;
 		case H323Gatekeeper::SecurityDenied :
-			msg = QString("ОШИБКА! Гейткипер отказал из соображений безопасности, проверьте пароль.");
+			msg = QString("Error: Security denial");
 			break;
 		case H323Gatekeeper::TransportError :
-			msg = QString("ОШИБКА! Ошибка соединения с Гейткипером.");
+			msg = QString("Error: Transport error");
 			break;
 		default :
-			if ((reason&H323Gatekeeper::RegistrationRejectReasonMask) != 0)
+			if ((reason & H323Gatekeeper::RegistrationRejectReasonMask) != 0)
 			{
-				msg = QString("Гейткипер отказал в регистрации с кодом %1.")
-					.arg((int) reason&(H323Gatekeeper::RegistrationRejectReasonMask-1));
+				msg = QString("Gatekeeper registration rejcted with code %1.")
+					.arg((int) reason & (H323Gatekeeper::RegistrationRejectReasonMask-1));
 			}
 			break;
 		}
@@ -941,24 +944,24 @@ bool CMyPhoneEndPoint::FindGatekeeper()
 		if (!gkHost.IsEmpty())
 		{
 			if (!gkid.IsEmpty())
-				msg = QString("ОШИБКА! Не могу найти Гейткипер с ID %1 на %2.")
+				msg = QString("Error! Could not find gatekeeper with ID% 1 on% 2.")
 					.arg((const char *)gkid)
 					.arg((const char *)gkHost);
 			else
-				msg = QString("ОШИБКА! Не могу найти Гейткипер на %2.")
+				msg = QString("Error! I can not find the gatekeeper at% 2.")
 					.arg((const char *)gkHost);
 		}
 		else
 		{
 			if (!gkid.IsEmpty())
-				msg = QString("ОШИБКА! Не могу найти Гейткипер с ID %1 в сети.")
+				msg = QString("Error! I can not find the gatekeeper with ID% 1 on the network.")
 					.arg((const char *)gkid);
 			else
 			{
 				if (gkRequired)
-					msg = QString("ОШИБКА! Не могу найти Гейткипер в сети.");
+					msg = QString("Error! I can not find a gatekeeper on the network.");
 				else
-					msg = QString("Гейткипер не найден.");
+					msg = QString("No gatekeeper found.");
 			}
 		}
 	}
@@ -990,7 +993,7 @@ CMyPhoneConnection::CMyPhoneConnection(
 
 PBoolean CMyPhoneConnection::OnAlerting(const H323SignalPDU &, const PString & user)
 {
-	QString msg = QString("Вызываем %1...").arg(m_dialog->FindContactName(*this));
+	QString msg = QString("Call %1...").arg(m_dialog->FindContactName(*this));
 	endpoint.OutputMsg(msg);
 	return TRUE;
 }
