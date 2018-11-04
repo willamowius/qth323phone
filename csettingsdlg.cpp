@@ -247,31 +247,31 @@ void CSettingsDlg::slot_ApplyChange()
 void CSettingsDlg::slot_ComboBoxChange(int state)
 {
 	QString t_str;
-	PConfig& config = p_endpoint->config;
+	PConfig & config = p_endpoint->config;
 
-	if(sender()==ui.IDS_DEVSTR)
+	if (sender() == ui.IDS_DEVSTR)
 	{
 		t_str = ui.IDS_DEVSTR->currentText();
-		if(!t_str.isEmpty())
+		if (!t_str.isEmpty())
 		{
 			printf("VideoDeviceConfigKey - %s\n", t_str.toAscii().data());
 			config.SetString(VideoDeviceConfigKey, t_str.toAscii().data());
 		}
 	}
-	if(sender()==ui.IDS_INDEVSTR)
+	if (sender() == ui.IDS_INDEVSTR)
 	{
 		t_str = ui.IDS_INDEVSTR->currentText();
-		if(!t_str.isEmpty())
+		if (!t_str.isEmpty())
 		{
 			printf("SetSoundChannelRecordDevice - %s\n", t_str.toAscii().data());
 			config.SetString(SoundRecordConfigKey, t_str.toAscii().data());
 			//p_endpoint->SetSoundChannelRecordDevice(t_str.toAscii().data());
 		}
 	}
-	if(sender()==ui.IDS_OUTDEVSTR)
+	if (sender() == ui.IDS_OUTDEVSTR)
 	{
 		t_str = ui.IDS_OUTDEVSTR->currentText();
-		if(!t_str.isEmpty())
+		if (!t_str.isEmpty())
 		{
 			printf("SetSoundChannelPlayDevice - %s\n", t_str.toAscii().data());
 			config.SetString(SoundPlayConfigKey, t_str.toAscii().data());
@@ -286,7 +286,7 @@ void CSettingsDlg::slot_VCodecUp()
 	if(!item)
 		return;
 	int indx = ui.IDS_VCADECSSTR->currentRow();
-	if(indx==0)
+	if(indx == 0)
 		return;
 	ui.IDS_VCADECSSTR->takeItem(indx);
 	ui.IDS_VCADECSSTR->insertItem(indx-1, item);
@@ -296,10 +296,10 @@ void CSettingsDlg::slot_VCodecUp()
 void CSettingsDlg::slot_VCodecDown()
 {
 	QListWidgetItem *item = ui.IDS_VCADECSSTR->currentItem();
-	if(!item)
+	if (!item)
 		return;
 	int indx = ui.IDS_VCADECSSTR->currentRow();
-	if(indx==ui.IDS_VCADECSSTR->count()-1)
+	if (indx == ui.IDS_VCADECSSTR->count()-1)
 		return;
 	ui.IDS_VCADECSSTR->takeItem(indx);
 	ui.IDS_VCADECSSTR->insertItem(indx+1, item);
@@ -312,7 +312,7 @@ void CSettingsDlg::slot_ACodecUp()
 	if(!item)
 		return;
 	int indx = ui.IDS_CADECSSTR->currentRow();
-	if(indx==0)
+	if (indx == 0)
 		return;
 	ui.IDS_CADECSSTR->takeItem(indx);
 	ui.IDS_CADECSSTR->insertItem(indx-1, item);
@@ -389,9 +389,9 @@ void CSettingsDlg::slot_AItemChanged(QListWidgetItem *item, QListWidgetItem*)
 void CSettingsDlg::slot_GetFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-		QObject::tr("Выбор аудио файла"),
+		QObject::tr("Select audio file"),
 		ui.IDS_RINGFSTR->text(),
-		QObject::tr("аудио файлы (*.wav);;все файлы (*.*)")
+		QObject::tr("Audio file (*.wav);;All file (*.*)")
 		);
 
 	if (fileName.isEmpty())

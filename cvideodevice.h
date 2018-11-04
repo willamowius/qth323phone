@@ -44,7 +44,7 @@ public:
 		);
 
 	PBoolean SetColourFormat(
-		const PString & colourFormat // New colour format for device.
+		const PString & colourFormat // New color format for device.
 		);
 	PBoolean FrameComplete();
 

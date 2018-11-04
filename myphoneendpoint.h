@@ -36,8 +36,6 @@ public:
 
 	mutable MyStat	m_stat;
 
-	//char **tvCaps;
-
     PBoolean OnIncomingCall(H323Connection &, const H323SignalPDU &, H323SignalPDU &);
 	virtual H323Connection::AnswerCallResponse OnAnswerCall(H323Connection &, const PString & caller,const H323SignalPDU &,H323SignalPDU &);
 	virtual void OnConnectionEstablished(H323Connection & connection, const PString & token);
@@ -105,7 +103,6 @@ class CMyPhoneConnection : public H323Connection
     PBoolean OnAlerting(const H323SignalPDU &, const PString &);
     void OnUserInputString(const PString &);
 
-    //virtual void SelectDefaultLogicalChannel( unsigned sessionID   );
   protected:
     CMyPhoneEndPoint		&endpoint;
     QtPhoneDlg			*m_dialog;

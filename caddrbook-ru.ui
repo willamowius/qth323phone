@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Contacts</string>
+   <string>Список контактов</string>
   </property>
   <property name="windowIcon">
    <iconset resource="qtphone.qrc">
@@ -37,12 +37,12 @@
      </property>
      <column>
       <property name="text">
-       <string>Name</string>
+       <string>Имя</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Address</string>
+       <string>Адрес</string>
       </property>
      </column>
     </widget>
@@ -50,19 +50,19 @@
    <item row="0" column="1">
     <widget class="QToolButton" name="cmdAdd">
      <property name="toolTip">
-      <string>Add contact</string>
+      <string>Добавить контакт</string>
      </property>
      <property name="statusTip">
-      <string>Add contact</string>
+      <string>Добавить контакт</string>
      </property>
      <property name="whatsThis">
-      <string>Add contact</string>
+      <string>Добавить контакт</string>
      </property>
      <property name="accessibleName">
-      <string>Add contact</string>
+      <string>Добавить контакт</string>
      </property>
      <property name="accessibleDescription">
-      <string>Add contact</string>
+      <string>Добавить контакт</string>
      </property>
      <property name="text">
       <string>...</string>
@@ -76,19 +76,19 @@
    <item row="1" column="1">
     <widget class="QToolButton" name="cmdDel">
      <property name="toolTip">
-      <string>Delete contact</string>
+      <string>Удалить контакт</string>
      </property>
      <property name="statusTip">
-      <string>Delete contact</string>
+      <string>Удалить контакт</string>
      </property>
      <property name="whatsThis">
-      <string>Delete contact</string>
+      <string>Удалить контакт</string>
      </property>
      <property name="accessibleName">
       <string>Удалить контакт</string>
      </property>
      <property name="accessibleDescription">
-      <string>Delete contact</string>
+      <string>Удалить контакт</string>
      </property>
      <property name="text">
       <string>...</string>

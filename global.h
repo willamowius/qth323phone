@@ -4,13 +4,13 @@
 #include <ptlib.h>
 #include <ptlib/pprocess.h>
 
-#if PTLIB_MAJOR<=2 && PTLIB_MINOR<10
+#if PTLIB_MAJOR <= 2 && PTLIB_MINOR < 10
 	#define PBoolean		BOOL
 #endif
 
 //#include <h323pluginmgr.h>
 
-const char strProgName[]="QtPhone";
+const char strProgName[] = "QtH323Phone";
 const int progMajorVersion = 0;
 const int progMinorVersion = 1;
 #define MF_RELEASE	//*** Uncomment this when go out of "beta" versioning ***
@@ -18,10 +18,10 @@ const int progBuildVersion = 0;
 const char strProgPostfix[]="";
 const char strProgAuthor[]="H323plus project (support@h323plus.org)";
 const char strProgWeb[]="https://www.h323plus.org/";
-const char strProgWebHelp[]="https://h323plus.org/myphone.html";
+const char strProgWebHelp[]="https://h323plus.org/";
 //
 const char strProgRespects[]="\t~~~ Thanks goes to: ~~~\r\n\
-							 * All OpenH323/H323plus developers amd mailing list members\r\n\
+							 * All OpenH323/H323plus developers and mailing list members\r\n\
 							 * Franz J Ehrengruber (for testing and hardware support)\r\n\
 							 * Guilhem Tardy (for help with the initial H.263 video codec)\r\n\
 							 * Simon Horne (for incorporating in h323plus project)\r\n";

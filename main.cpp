@@ -3,7 +3,6 @@
 #include <QTextCodec>
 
 
-
 /*
 int main(int argc, char *argv[])
 {
@@ -59,7 +58,7 @@ MyTest::~MyTest()
 
 void MyTest::Main()
 {
-	PArgList &args = GetArguments();
+	PArgList & args = GetArguments();
 	int argCount = args.GetCount();
 	const char **argV = (const char**)calloc(argCount+1, sizeof(const char*));
 	bool fCreateConsole = false;
@@ -97,12 +96,10 @@ void MyTest::Main()
 
 	if (QSystemTrayIcon::isSystemTrayAvailable())
 	{
-		puts("SystemTray - Available");
  		QApplication::setQuitOnLastWindowClosed(false);
     }
 	else
 	{
-		puts("SystemTray - NOT Available");
 		a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 		w->show();
 	}

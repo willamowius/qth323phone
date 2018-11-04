@@ -29,7 +29,7 @@ CAddrBook::CAddrBook(QWidget *parent)
 	if (!document.setContent(device, true, &text, &errorLine,
 		&errorColumn))
 	{
-		QMessageBox::information(this, tr("Ошибка чтения файла"),
+		QMessageBox::information(this, tr("Error reading file"),
 			QString("Файл: %1, строка: %2; %3").arg(text).arg(errorLine).arg(text),
 			QMessageBox::Ok);
 		return;
@@ -96,11 +96,11 @@ int CAddrBook::saveIni()
 	QFile file(FILE_NAME);
 	if (!file.open(QFile::WriteOnly | QFile::Text))
 	{
-		QMessageBox::information(this, tr("Внимание!"),
-			tr("Невозможно создать файл"), QMessageBox::Ok);
+		QMessageBox::information(this, tr("Error!"),
+			tr("Can't create file"), QMessageBox::Ok);
 		return 0;
 	}
-	QIODevice *device = &file;
+	QIODevice * device = &file;
 	QTextStream out(device);
 	document.save(out, 4);
 	file.close();
@@ -142,12 +142,12 @@ void CAddrBook::delAddr()
 	QString name;
 
 	p_item = ui.tbl->item(row, 0);
-	if(p_item)
+	if (p_item)
 		name = p_item->text();
 
-	if(QMessageBox::question(this, tr("Удаление контакта"),
-		tr("Вы действительно хотите удалить \"%1\"?").arg(name),
-		tr("Да"), tr("Нет"), tr("Отмена"))!=0)
+	if (QMessageBox::question(this, tr("Deleting conect"),
+		tr("Really delete contact \"%1\"?").arg(name),
+		tr("Yes"), tr("No"), tr("Cancel")) != 0)
 		return;
 
 	ui.tbl->removeRow(row);

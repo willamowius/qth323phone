@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QtH323Phone</string>
+   <string>Терминал видеоконференции</string>
   </property>
   <property name="windowIcon">
    <iconset resource="qtphone.qrc">
@@ -35,7 +35,7 @@
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>management</string>
+        <string>управление</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <property name="margin">
@@ -68,7 +68,7 @@
           <item>
            <widget class="QPushButton" name="cmdCall">
             <property name="text">
-             <string>Call</string>
+             <string>Звонить</string>
             </property>
             <property name="icon">
              <iconset resource="qtphone.qrc">
@@ -79,7 +79,7 @@
           <item>
            <widget class="QPushButton" name="cmdRefuse">
             <property name="text">
-             <string>Hangup</string>
+             <string>Отменить</string>
             </property>
             <property name="icon">
              <iconset resource="qtphone.qrc">
@@ -92,16 +92,16 @@
         <item row="1" column="0">
          <widget class="QToolButton" name="cmdMuteSpeaker">
           <property name="toolTip">
-           <string>Sound off</string>
+           <string>Выкл звук</string>
           </property>
           <property name="statusTip">
-           <string>Sound off</string>
+           <string>Выкл звук</string>
           </property>
           <property name="whatsThis">
-           <string>Sound off</string>
+           <string>Выкл звук</string>
           </property>
           <property name="text">
-           <string>Sound off</string>
+           <string>Выкл звук</string>
           </property>
           <property name="icon">
            <iconset resource="qtphone.qrc">
@@ -128,16 +128,16 @@
         <item row="2" column="0">
          <widget class="QToolButton" name="cmdMuteMicrophone">
           <property name="toolTip">
-           <string>Mute</string>
+           <string>Выкл микр</string>
           </property>
           <property name="statusTip">
-           <string>Mute</string>
+           <string>Выкл микр</string>
           </property>
           <property name="whatsThis">
-           <string>Mute</string>
+           <string>Выкл микр</string>
           </property>
           <property name="text">
-           <string>Mute</string>
+           <string>Выкл микр</string>
           </property>
           <property name="icon">
            <iconset resource="qtphone.qrc">
@@ -198,7 +198,7 @@
            <item row="1" column="1">
             <widget class="QPushButton" name="cmdSendMsg">
              <property name="text">
-              <string>To send</string>
+              <string>Отправить</string>
              </property>
              <property name="icon">
               <iconset resource="qtphone.qrc">
@@ -213,7 +213,7 @@
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Protocol</string>
+        <string>протокол</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <property name="margin">
@@ -242,7 +242,7 @@
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>File</string>
+     <string>Файл</string>
     </property>
     <addaction name="actSetup"/>
     <addaction name="actShowVideo"/>
@@ -250,7 +250,7 @@
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>Help</string>
+     <string>Помощь</string>
     </property>
     <addaction name="actAbout"/>
    </widget>
@@ -264,7 +264,7 @@
      <normaloff>:/images/Resources/teleph.png</normaloff>:/images/Resources/teleph.png</iconset>
    </property>
    <property name="text">
-    <string>Settings</string>
+    <string>Установки</string>
    </property>
   </action>
   <action name="actRestore">
@@ -273,10 +273,10 @@
      <normaloff>:/images/Resources/qcam_p1.png</normaloff>:/images/Resources/qcam_p1.png</iconset>
    </property>
    <property name="text">
-    <string>Open</string>
+    <string>Открыть</string>
    </property>
    <property name="toolTip">
-    <string>Open</string>
+    <string>Открыть</string>
    </property>
   </action>
   <action name="actExit">
@@ -285,7 +285,7 @@
      <normaloff>:/images/Resources/msgbox4.png</normaloff>:/images/Resources/msgbox4.png</iconset>
    </property>
    <property name="text">
-    <string>Exit</string>
+    <string>Выход</string>
    </property>
   </action>
   <action name="actRefuse">
@@ -294,10 +294,10 @@
      <normaloff>:/images/Resources/refuse.png</normaloff>:/images/Resources/refuse.png</iconset>
    </property>
    <property name="text">
-    <string>Hangup</string>
+    <string>Закончить разговор</string>
    </property>
    <property name="toolTip">
-    <string>Hangup</string>
+    <string>Закончить разговор</string>
    </property>
   </action>
   <action name="actShowVideo">
@@ -309,18 +309,18 @@
      <normaloff>:/images/Resources/qcam_p1.png</normaloff>:/images/Resources/qcam_p1.png</iconset>
    </property>
    <property name="text">
-    <string>Show video</string>
+    <string>Показать видео</string>
    </property>
    <property name="toolTip">
-    <string>Open</string>
+    <string>Открыть</string>
    </property>
   </action>
   <action name="actAbout">
    <property name="text">
-    <string>About</string>
+    <string>О программе</string>
    </property>
    <property name="toolTip">
-    <string>About</string>
+    <string>О программе</string>
    </property>
   </action>
  </widget>

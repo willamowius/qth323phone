@@ -388,7 +388,7 @@ PBoolean CMyPhoneEndPoint::OpenVideoChannel(H323Connection &connection, PBoolean
 		{
 			if(!NoDevice)
 			{
-				QString msg = QString("ОШИБКА! Не могу открыть устройство: %1; канал: %2")
+				QString msg = QString("Error: Can't open device: %1; channel: %2")
 					.arg((const char *) deviceName)
 					.arg(config.GetInteger(VideoSourceConfigKey,0));
 				emit signal_OutputMsg(msg);
@@ -515,7 +515,6 @@ H323Connection * CMyPhoneEndPoint::CreateConnection(unsigned refID)
 
 void CMyPhoneEndPoint::OnLogicalChannel(const H323Channel & channel, char *txStrID, char *rxStrID)
 {
-	puts("CMyPhoneEndPoint::OnLogicalChannel");
 	const H323Capability & capability = channel.GetCapability();
 	PString name = capability.GetFormatName();
 	PString frames;
@@ -757,8 +756,6 @@ void CMyPhoneEndPoint::LoadCapabilities()
 		if (name.IsEmpty()) break;
 	}
 
-	//tvCaps = (char **)calloc(codecNum+1,sizeof(char *));
-
 	int tvNum = 0;
 	codecNum = 0;
 	for (;;)
@@ -831,8 +828,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 		}
 		if(suffixPos == P_MAX_INDEX) // добавляю в список допустимых
 		{
-			const char *p2pstr=name;
-			//tvCaps[tvNum]=strdup(p2pstr);
+			const char *p2pstr = name;
 			tvNum++;
 		}
 	}
@@ -860,16 +856,7 @@ void CMyPhoneEndPoint::LoadCapabilities()
 
 	PTRACE(1, "QtPhone\tCapability Table:\n" << setprecision(4) << capabilities);
 }
-/*
-void H323Capability::SetMediaFormatOptionInteger(const PString &name, int val)
-{
-	mediaFormat.SetOptionInteger(name, val);
-}
-void H323GenericCapabilityInfo::SetMaxBitRate(unsigned bitrate)
-{
-	maxBitRate = bitrate;
-}
-*/
+
 bool CMyPhoneEndPoint::FindGatekeeper()
 {
 	QString msg;
@@ -1013,46 +1000,5 @@ void CMyPhoneConnection::OnUserInputString(const PString & value)
 	QString msg = QString("<-%1: ""%2""").arg(m_dialog->FindContactName(*this)).arg((const char*)value);
 	endpoint.OutputUsrMsg(msg);
 }
-/*
-void CMyPhoneConnection::SelectDefaultLogicalChannel(
-      unsigned sessionID    ///< Session ID to find default logical channel.
-    )
-{
-	puts("CMyPhoneConnection::SelectDefaultLogicalChannel");
-	if (FindChannel (sessionID, FALSE))
-		return;
 
-	if(sessionID == RTP_Session::DefaultVideoSessionID)
-	{
-		if(endpoint.tvCaps==NULL)
-		{
-			for (PINDEX i = 0; i < remoteCapabilities.GetSize(); i++)
-			{
-				H323Capability & remoteCapability = remoteCapabilities[i];
-				if (remoteCapability.GetDefaultSessionID() == sessionID)
-				{
-//					if(remoteCapabilities.FindCapability(remoteCapability,sessionID)==TRUE)
-					{
-//						PTRACE(2, "H245\tOpenLogicalChannel " << remoteCapability);
-//						OpenLogicalChannel(remoteCapability, sessionID, H323Channel::IsTransmitter);
-//						return;
-					}
-				}
-			}
-		}
-		else
-		{
-			H323Capability * remoteCapability = remoteCapabilities.SelectRemoteCapabilty(sessionID,endpoint.tvCaps);
-			if(remoteCapability==NULL)
-				return;
-			PTRACE(2, "H245\tOpenLogicalChannel " << *remoteCapability);
-			OpenLogicalChannel(*remoteCapability, sessionID, H323Channel::IsTransmitter);
-			return;
-		}
-		return;
-	}
-
-	H323Connection::SelectDefaultLogicalChannel(sessionID);
-}
-*/
 //////////////////////////////////////////////////////////////////////

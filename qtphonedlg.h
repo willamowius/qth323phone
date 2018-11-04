@@ -34,8 +34,8 @@ public:
 	QtPhoneDlg(QWidget *parent = 0, Qt::WFlags flags = 0);
 	~QtPhoneDlg();
 
-	PString			m_token;
-	QLabel			*m_pLblStat;
+	PString	m_token;
+	QLabel *m_pLblStat;
 
 
 	PTimer indTimer;
@@ -62,10 +62,10 @@ public:
 	void ShowStats() const;
 	int Close();
 
-#if PTRACING	// If Compiled with PTlib Tracing support (like in OpenH323)
+#if PTRACING	// If compiled with PTlib Tracing support (like in OpenH323)
 	bool Tracing;
     bool OpenTraceFile(PConfig & config);
-	int TraceLevel;	// set -1 for no trace, or set trace detalization level (0-3).
+	int TraceLevel;	// set -1 for no trace, or set trace detail level (0-3).
     PTextFile * myTraceFile;
 #endif
 

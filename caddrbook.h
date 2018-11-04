@@ -16,7 +16,7 @@ class CAddrBook : public QDialog
 public:
 	CAddrBook(QWidget *parent = 0);
 	~CAddrBook();
-	int getAddr(QString &addr);
+	int getAddr(QString & addr);
 
 public slots:
 	void addAddr();

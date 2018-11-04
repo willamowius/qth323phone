@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Settings</string>
+   <string>Установки</string>
   </property>
   <property name="windowIcon">
    <iconset resource="qtphone.qrc">
@@ -31,19 +31,19 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Main</string>
+       <string>Основные</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>User</string>
+          <string>Пользователь</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>User name:</string>
+             <string>Имя пользователя:</string>
             </property>
            </widget>
           </item>
@@ -56,28 +56,28 @@
        <item>
         <widget class="QCheckBox" name="IDS_AANSWERSTR">
          <property name="text">
-          <string>Auto-answer</string>
+          <string>Авто-ответ</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="IDS_DTMFSTRSTR">
          <property name="text">
-          <string>DTMF as string</string>
+          <string>DTMF как строку</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="IDS_D242STR">
          <property name="text">
-          <string>Disable H.245 tunneling</string>
+          <string>Не туннелировать H245</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="IDS_DFSTARTSTR">
          <property name="text">
-          <string>Disable Fast-Start</string>
+          <string>Отключить Fast-Start</string>
          </property>
         </widget>
        </item>
@@ -95,7 +95,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Call sound:</string>
+            <string>Звук вызова:</string>
            </property>
           </widget>
          </item>
@@ -112,16 +112,16 @@
          <item>
           <widget class="QToolButton" name="IDS_RINGFCMDP">
            <property name="toolTip">
-            <string>Listen</string>
+            <string>Прослушать</string>
            </property>
            <property name="statusTip">
-            <string>Listen</string>
+            <string>Прослушать</string>
            </property>
            <property name="whatsThis">
-            <string>Listen</string>
+            <string>Прослушать</string>
            </property>
            <property name="text">
-            <string>Listen</string>
+            <string>Прослушать</string>
            </property>
            <property name="icon">
             <iconset resource="qtphone.qrc">
@@ -135,7 +135,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Network</string>
+       <string>Сеть</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -147,7 +147,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Network type:</string>
+          <string>Тип сети:</string>
          </property>
         </widget>
        </item>
@@ -202,14 +202,14 @@
           </size>
          </property>
          <property name="text">
-          <string>KB/s</string>
+          <string>Кб/с</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>RTP port min:</string>
+          <string>RTP порт мин:</string>
          </property>
         </widget>
        </item>
@@ -229,7 +229,7 @@
        <item row="1" column="3" colspan="2">
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>RTP port max:</string>
+          <string>RTP порт макс.:</string>
          </property>
         </widget>
        </item>
@@ -262,7 +262,7 @@
        <item row="3" column="0">
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>NAT router:</string>
+          <string>NAT роутер:</string>
          </property>
         </widget>
        </item>
@@ -272,7 +272,7 @@
        <item row="4" column="0" colspan="2">
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>Listen IP:</string>
+          <string>Локал. и-фейсы:</string>
          </property>
         </widget>
        </item>
@@ -282,7 +282,7 @@
        <item row="5" column="0" colspan="2">
         <widget class="QLabel" name="label_9">
          <property name="text">
-          <string>IP service type:</string>
+          <string>Тип IP сервиса:</string>
          </property>
         </widget>
        </item>
@@ -335,13 +335,13 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Gatekeeper</string>
+       <string>Гейткипер</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0">
         <widget class="QCheckBox" name="IDS_GKUSESTR">
          <property name="text">
-          <string>Use Gatekeeper</string>
+          <string>Использ. Гейткипер</string>
          </property>
         </widget>
        </item>
@@ -351,7 +351,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Gatekeeper required</string>
+          <string>Гейткипер обязателен</string>
          </property>
         </widget>
        </item>
@@ -361,7 +361,7 @@
           <bool>false</bool>
          </property>
          <property name="title">
-          <string>Search Gatekeeper</string>
+          <string>Искать Гейткипер</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <property name="margin">
@@ -373,14 +373,14 @@
           <item row="0" column="0">
            <widget class="QRadioButton" name="IDS_GKAUTOLOCSTR">
             <property name="text">
-             <string>Auto search</string>
+             <string>Авто поиск</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="label_11">
             <property name="text">
-             <string>GK password:</string>
+             <string>ГК пароль:</string>
             </property>
            </widget>
           </item>
@@ -394,7 +394,7 @@
           <item row="1" column="0">
            <widget class="QRadioButton" name="IDS_GKHOSTLOCSTR">
             <property name="text">
-             <string>Search by host:</string>
+             <string>Искать по хосту:</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -407,7 +407,7 @@
           <item row="2" column="0">
            <widget class="QRadioButton" name="IDS_GKIDLOCSTR">
             <property name="text">
-             <string>Search by ID:</string>
+             <string>Искать по ID:</string>
             </property>
            </widget>
           </item>
@@ -424,7 +424,7 @@
        <item row="2" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
-          <string>User aliases</string>
+          <string>Псевдонимы пользователя</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
           <property name="margin">
@@ -438,7 +438,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="label_12">
               <property name="text">
-               <string>Nickname:</string>
+               <string>Псевдоним:</string>
               </property>
              </widget>
             </item>
@@ -473,7 +473,7 @@
                </size>
               </property>
               <property name="text">
-               <string>Ext.</string>
+               <string>Доб.</string>
               </property>
              </widget>
             </item>
@@ -499,7 +499,7 @@
                </size>
               </property>
               <property name="text">
-               <string>Ubr.</string>
+               <string>Убр.</string>
               </property>
              </widget>
             </item>
@@ -528,7 +528,7 @@
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>Sound</string>
+       <string>Звук</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="0">
@@ -540,7 +540,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Speaker:</string>
+          <string>Устр. вывода:</string>
          </property>
         </widget>
        </item>
@@ -556,7 +556,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Microphone:</string>
+          <string>Устр. ввода:</string>
          </property>
         </widget>
        </item>
@@ -568,7 +568,7 @@
          <item>
           <widget class="QLabel" name="label_15">
            <property name="text">
-            <string>Buffer:</string>
+            <string>Буфер:</string>
            </property>
           </widget>
          </item>
@@ -585,7 +585,7 @@
          <item>
           <widget class="QLabel" name="label_16">
            <property name="text">
-            <string>Jitter:</string>
+            <string>Джитер:</string>
            </property>
           </widget>
          </item>
@@ -609,7 +609,7 @@
          <item>
           <widget class="QCheckBox" name="IDS_SLSTR">
            <property name="text">
-            <string>Silence detection</string>
+            <string>Детектор тишины</string>
            </property>
           </widget>
          </item>
@@ -618,7 +618,7 @@
        <item row="3" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
-          <string>Codec selection</string>
+          <string>Выбор кодеков</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
           <property name="margin">
@@ -639,7 +639,7 @@
              </size>
             </property>
             <property name="text">
-             <string>down</string>
+             <string>вниз</string>
             </property>
            </widget>
           </item>
@@ -659,14 +659,14 @@
           <item row="5" column="0">
            <widget class="QCheckBox" name="IDS_CHKAES">
             <property name="text">
-             <string>AES encryption</string>
+             <string>AES включено</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
            <widget class="QCheckBox" name="IDS_CSENBLSTR">
             <property name="text">
-             <string>On/Off</string>
+             <string>Вкл</string>
             </property>
            </widget>
           </item>
@@ -679,7 +679,7 @@
              </size>
             </property>
             <property name="text">
-             <string>up</string>
+             <string>вверх</string>
             </property>
            </widget>
           </item>
@@ -690,7 +690,7 @@
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
-       <string>Video</string>
+       <string>Видео</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_10">
        <item row="0" column="0">
@@ -702,7 +702,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Cam:</string>
+          <string>Устр.:</string>
          </property>
         </widget>
        </item>
@@ -722,14 +722,14 @@
        <item row="1" column="0" colspan="2">
         <widget class="QCheckBox" name="IDS_VSENDSTR">
          <property name="text">
-          <string>Send video</string>
+          <string>Отправлять видео</string>
          </property>
         </widget>
        </item>
        <item row="1" column="4" rowspan="3" colspan="3">
         <widget class="QGroupBox" name="groupBox_6">
          <property name="title">
-          <string>Video settings</string>
+          <string>Настройки видео</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="spacing">
@@ -741,14 +741,14 @@
           <item>
            <widget class="QCheckBox" name="IDS_LVFLIPSTR">
             <property name="text">
-             <string>V-Flip left</string>
+             <string>В-Зерк. исход.</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="IDS_RVFLIPSTR">
             <property name="text">
-             <string>V-Flip right</string>
+             <string>В-Зерк. вход.</string>
             </property>
            </widget>
           </item>
@@ -758,21 +758,21 @@
        <item row="2" column="0" colspan="2">
         <widget class="QCheckBox" name="IDS_VRCVDSTR">
          <property name="text">
-          <string>Receive video</string>
+          <string>Получать видео</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QCheckBox" name="IDS_VLOCSTR">
          <property name="text">
-          <string>Show local</string>
+          <string>Показывать локал.</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="label_20">
          <property name="text">
-          <string>Size:</string>
+          <string>Размер:</string>
          </property>
         </widget>
        </item>
@@ -789,7 +789,7 @@
        <item row="5" column="0" colspan="7">
         <widget class="QGroupBox" name="groupBox_7">
          <property name="title">
-          <string>Transmit options</string>
+          <string>Параметры передачи</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_9">
           <property name="margin">
@@ -801,7 +801,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_23">
             <property name="text">
-             <string>Size:</string>
+             <string>Размер:</string>
             </property>
            </widget>
           </item>
@@ -825,7 +825,7 @@
           <item row="1" column="0">
            <widget class="QLabel" name="label_24">
             <property name="text">
-             <string>Quality:</string>
+             <string>Кач-во:</string>
             </property>
            </widget>
           </item>
@@ -872,7 +872,7 @@
        <item row="6" column="0" colspan="7">
         <widget class="QGroupBox" name="groupBox_5">
          <property name="title">
-          <string>Codec selection</string>
+          <string>Выбор кодеков</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
           <property name="margin">
@@ -893,7 +893,7 @@
              </size>
             </property>
             <property name="text">
-             <string>down</string>
+             <string>вниз</string>
             </property>
            </widget>
           </item>
@@ -913,7 +913,7 @@
           <item row="2" column="1">
            <widget class="QCheckBox" name="IDS_VCSENBLSTR">
             <property name="text">
-             <string>On/Off</string>
+             <string>Вкл</string>
             </property>
            </widget>
           </item>
@@ -926,7 +926,7 @@
              </size>
             </property>
             <property name="text">
-             <string>up</string>
+             <string>вверх</string>
             </property>
            </widget>
           </item>
@@ -942,7 +942,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Knl</string>
+          <string>Кнл</string>
          </property>
         </widget>
        </item>
@@ -957,7 +957,7 @@
      </widget>
      <widget class="QWidget" name="tab_6">
       <attribute name="title">
-       <string>Interface</string>
+       <string>Интерфейс</string>
       </attribute>
      </widget>
     </widget>

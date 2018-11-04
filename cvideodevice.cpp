@@ -90,7 +90,7 @@ PBoolean CVideoOutputDevice::SetColourFormat(
 {
 	PWaitAndSignal m(mutex);
 
-	printf("colourFormat=%s\n", (const char*)colourFormat);
+	printf("colorFormat=%s\n", (const char*)colourFormat);
 	if (((colourFormat *= "BGR24") || (colourFormat *= "BGR32")) &&
 		PVideoOutputDeviceRGB::SetColourFormat(colourFormat))
 	{

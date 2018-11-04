@@ -31,9 +31,9 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 		connect(ui.actRestore, SIGNAL(triggered()), this, SLOT(show()));
 
 		iconComboBox = new QComboBox;
-		iconComboBox->addItem(QIcon(":/images/Resources/qcam_p1.png"), tr("Нет соединения"));
-		iconComboBox->addItem(QIcon(":/images/Resources/teleph2.png"), tr("Идет разговор"));
-		iconComboBox->addItem(QIcon(":/images/Resources/bell.png"), tr("Входящий звонок"));
+		iconComboBox->addItem(QIcon(":/images/Resources/qcam_p1.png"), tr("No connection"));
+		iconComboBox->addItem(QIcon(":/images/Resources/teleph2.png"), tr("Talking"));
+		iconComboBox->addItem(QIcon(":/images/Resources/bell.png"), tr("Ringing"));
 		iconComboBox->setCurrentIndex(STATE_WORK);
 		connect(iconComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(slot_SetIcon(int)));
 		connect(this, SIGNAL(signal_SetIcon(int)), this, SLOT(slot_SetIcon(int)));
@@ -61,7 +61,8 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 	m_pLblStat	= new QLabel();
 	ui.statusbar->addPermanentWidget(m_pLblStat);
 
-	ui.txtAddress->setText("192.168.111.50");
+	// pre-set call destination
+	//ui.txtAddress->setText("192.168.111.50");
 	//ui.txtAddress->setText("192.168.1.103");
 
 	m_endpoint = new CMyPhoneEndPoint;
@@ -71,7 +72,7 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
     myTraceFile = NULL;
     TraceLevel = -1;
 	TraceLevel = 3;
-	if(TraceLevel>=0)
+	if (TraceLevel >= 0)
 		Tracing = OpenTraceFile(config);
 #endif
 
@@ -79,7 +80,7 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 	ui.cmdRefuse->setEnabled(false);
 	ui.pnlMsg->setEnabled(false);
 	ui.actShowVideo->setEnabled(false);
-	ui.txtSendMsg->setPlainText("Ваши текстовые сообщения...");
+	ui.txtSendMsg->setPlainText("Your text messages...");
 
 	connect(ui.actShowVideo, SIGNAL(triggered(bool)), this, SLOT(slot_ShowVideoPanels(bool)));
 
@@ -182,7 +183,7 @@ void QtPhoneDlg::slot_IconActivated(QSystemTrayIcon::ActivationReason reason)
 	{
 	case QSystemTrayIcon::Trigger:
 	case QSystemTrayIcon::DoubleClick:
-		if(m_state==STATE_CALL)
+		if (m_state == STATE_CALL)
 			slot_OnCall();
 		else
 			showNormal();
@@ -202,9 +203,9 @@ void QtPhoneDlg::slot_Close()
 
 int QtPhoneDlg::Close()
 {
-	if(QMessageBox::question(this, tr("Закрытие приложения"),
-		tr("Вы действительно хотите выйти из приложения"),
-		tr("Да"), tr("Нет"), tr("Отмена"))!=0)
+	if (QMessageBox::question(this, tr("Exit application"),
+		tr("Do you really want to exit ?"),
+		tr("Yes"), tr("No"), tr("Cancel")) != 0)
 		return 0;
 
 	if(m_endpoint->HasConnection(m_token))
@@ -267,7 +268,7 @@ bool QtPhoneDlg::OpenTraceFile(PConfig & config)
 void QtPhoneDlg::slot_OnCall()
 {
 	//если пришли из клика по сообщению
-	if(trayIcon && sender()==trayIcon && m_state==STATE_WORK)// пришло сообщение
+	if (trayIcon && sender( )== trayIcon && m_state == STATE_WORK)// пришло сообщение
 	{
 		show();
 		return;
@@ -279,20 +280,17 @@ void QtPhoneDlg::slot_OnCall()
 
 		QString curDest = m_destination;
 		curDest.simplified();
-		int iPos=-1;
-		if((iPos=curDest.indexOf(" "))>0)
+		int iPos = -1;
+		if ((iPos = curDest.indexOf(" ")) > 0)
 			curDest = curDest.mid(iPos);
 		//ui.cmdCall->setEnabled(false);
-		puts(curDest.toAscii().data());
-		puts("m_token:");
-		puts((const char *)m_token);
 		m_endpoint->MakeCall((const char *)curDest.toAscii().data(), m_token);
 	}
 	else
 	{
 		ringSoundTimer.Stop();
 
-		ui.cmdCall->setText(tr("Звонить"));
+		ui.cmdCall->setText(tr("Call"));
 
 		H323Connection * connection = m_endpoint->FindConnectionWithLock(m_token);
 		if (connection == NULL)
@@ -319,9 +317,9 @@ void QtPhoneDlg::slot_OnConnectionEstablished(const QString &remotename)
 	ui.cmdCall->setEnabled(false);
 	ui.cmdRefuse->setEnabled(true);
 	ui.actRefuse->setEnabled(true);
-	ui.cmdRefuse->setText(tr("Отменить"));
+	ui.cmdRefuse->setText(tr("Cancel"));
 
-	QString text = tr("Разговариваем с: ") + remotename;
+	QString text = tr("Talking with: ") + remotename;
 	slot_OutputStatus(text);
 
 	ui.txtSendMsg->clear();
@@ -340,7 +338,7 @@ void QtPhoneDlg::slot_OutputUserMsg(const QString &text)
 	ui.listMsg_2->setCurrentItem(pItem);
 
 	if(trayIcon && !isVisible())
-		trayIcon->showMessage(tr("Внимание"), text, QSystemTrayIcon::Information);
+		trayIcon->showMessage(tr("Attention"), text, QSystemTrayIcon::Information);
 	//puts(text.toAscii().data());
 }
 
@@ -385,7 +383,7 @@ void QtPhoneDlg::ShowStats() const
 		return;
 
 	QTime tCll;
-	QString txt = QString("Время: %1   Отправлено: %2(%3/s)   Получено: %4(%5/s)   Задержка: %6 ms")
+	QString txt = QString("Time: %1   Sent: %2(%3/s)   Received: %4(%5/s)   Delay: %6 ms")
 		.arg(tCll.addSecs(m_endpoint->m_stat.iSecs).toString("HH:mm:ss"))
 		.arg(ParseBytes(m_endpoint->m_stat.ibSent))
 		.arg(ParseBytes(m_endpoint->m_stat.ibSent/(m_endpoint->m_stat.iSecs>0?m_endpoint->m_stat.iSecs:1)))
@@ -413,11 +411,11 @@ void QtPhoneDlg::slot_OnConnectionCleared(const QString &remotename)
 
 	ui.cmdRefuse->setEnabled(false);
 	ui.actRefuse->setEnabled(false);
-	ui.cmdRefuse->setText(tr("Отказать"));
+	ui.cmdRefuse->setText(tr("Decline"));
 	ui.cmdCall->setEnabled(true);
-	ui.cmdCall->setText(tr("Звонить"));
+	ui.cmdCall->setText(tr("Call"));
 
-	QString msg = QString("Соединение с %1 завершено.").arg(remotename);
+	QString msg = QString("Connection with %1 completed.").arg(remotename);
 	slot_OutputStatus(msg);
 
 	m_pLblStat->setText("");
@@ -425,20 +423,20 @@ void QtPhoneDlg::slot_OnConnectionCleared(const QString &remotename)
 	// message window OFF
 	ui.pnlMsg->setEnabled(false);
 	ui.actShowVideo->setEnabled(false);
-	ui.txtSendMsg->setPlainText("Ваши текстовые сообщения...");
+	ui.txtSendMsg->setPlainText("Your text messages...");
 	ui.listMsg_2->clear();
 }
 
 void QtPhoneDlg::slot_SetLevelVolume(unsigned int val)
 {
-	if(val > ui.prBarSound->maximum())
+	if (val > ui.prBarSound->maximum())
 		ui.prBarSound->setMaximum(val);
 	ui.prBarSound->setValue(val);
 }
 
 void QtPhoneDlg::slot_SetLevelMic(unsigned int val)
 {
-	if(val > ui.prBarMic->maximum())
+	if (val > ui.prBarMic->maximum())
 		ui.prBarMic->setMaximum(val);
 	ui.prBarMic->setValue(val);
 }
@@ -505,16 +503,16 @@ void QtPhoneDlg::slot_OnAnswerCall(const QString &remotename)
 {
 	slot_SetIcon(STATE_CALL);
 
-	QString caller = remotename + QString(" звонит.");
+	QString caller = remotename + QString(" is calling.");
 
 	if(trayIcon && !m_endpoint->m_fAutoAnswer)
-		trayIcon->showMessage(tr("Внимание"), caller, QSystemTrayIcon::Information);
+		trayIcon->showMessage(tr("Attention"), caller, QSystemTrayIcon::Information);
 
 	ui.cmdRefuse->setEnabled(true);
 	ui.actRefuse->setEnabled(true);
 	ui.cmdCall->setEnabled(true);
-	ui.cmdCall->setText(tr("Ответить"));
-	ui.cmdRefuse->setText(tr("Отказать"));
+	ui.cmdCall->setText(tr("Answer"));
+	ui.cmdRefuse->setText(tr("Refuse"));
     slot_OutputStatus(caller);
 }
 
@@ -549,20 +547,17 @@ void QtPhoneDlg::slot_OnRefuse()
 	}
 }
 
-void QtPhoneDlg::SendUserInput(const QString &strusermsg)
+void QtPhoneDlg::SendUserInput(const QString & strusermsg)
 {
 //puts("1---------------");
 	H323Connection * connection = m_endpoint->FindConnectionWithLock(m_token);
 	if (connection == NULL)
 		return;
 
-//puts("2---------------");
 	connection->SendUserInput(PString(strusermsg.toAscii().data()));
-//puts("3---------------");
 	connection->Unlock();
 
-//puts("4---------------");
-	QString msg = QString("-> Вы сказали: ""%1""").arg(strusermsg);
+	QString msg = QString("-> you said: ""%1""").arg(strusermsg);
 	slot_OutputUserMsg(msg);
 }
 
@@ -581,14 +576,14 @@ void QtPhoneDlg::slot_OnSettings()
 
 void QtPhoneDlg::slot_ShowVideoPanels(bool show)
 {
-	if(sender()!=ui.actShowVideo)
+	if (sender() != ui.actShowVideo)
 	{
 		ui.actShowVideo->blockSignals(true);
 		ui.actShowVideo->setChecked(show);
 		ui.actShowVideo->blockSignals(false);
 	}
 
-	if(m_endpoint->m_vdlg)
+	if (m_endpoint->m_vdlg)
 	{
 		m_endpoint->m_vdlg->m_mutex.lock();
 		m_endpoint->m_vdlg->m_image = QImage();
@@ -642,12 +637,12 @@ void QtPhoneDlg::slot_RecvStats(const QString &txt)
 
 void QtPhoneDlg::about()
 {
-	QString caption = tr("О программе");
+	QString caption = tr("About");
 	QString text = "<HTML><p><b>";
 
-	text += tr("Терминал видеоконференции");
+	text += tr("QtH323Phone");
 	text += "</b></p><p>";
-	text += tr("Версия 2012.0.0.1");
+	text += tr("Version 2018.0.0.1");
 
 	QMessageBox::about(this, caption, text);
 }

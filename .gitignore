@@ -3,4 +3,6 @@ tmp/
 Makefile
 qtphone_trc.txt
 qth323phone.layout
+cov-int.tgz
+cov-int/
 
