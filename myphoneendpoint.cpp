@@ -31,6 +31,14 @@ CMyPhoneEndPoint::CMyPhoneEndPoint()
 	m_stat.iDelay = 0;
 	m_router = NULL;
 	localVideo = FALSE;
+	autoStartTransmitVideo = true;
+	autoStartReceiveVideo = true;
+	localFlip = false;
+	m_fSilenceOn = false;
+	m_fAutoAnswer = false;
+	m_fNoFastStart = false;
+	m_fDoH245Tunnelling = true;
+	m_fDtmfAsString = false;
 }
 
 CMyPhoneEndPoint::~CMyPhoneEndPoint()

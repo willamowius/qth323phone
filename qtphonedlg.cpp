@@ -70,7 +70,7 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 
 #if PTRACING	// If compiled with PTlib Tracing support (like in OpenH323)
     myTraceFile = NULL;
-    TraceLevel = -1;
+    //TraceLevel = -1;
 	TraceLevel = 3;
 	if (TraceLevel >= 0)
 		Tracing = OpenTraceFile(config);
@@ -137,6 +137,7 @@ QtPhoneDlg::QtPhoneDlg(QWidget *parent, Qt::WFlags flags)
 	connect(m_endpoint, SIGNAL(signal_CreateConnection()), this, SLOT(slot_CreateConnection()));
 
 	m_endpoint->Initialise(this);
+	m_state = STATE_READY;
 }
 
 QtPhoneDlg::~QtPhoneDlg()
